@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.sign_in.SignUpActivity">
+
+    <LinearLayout
+        android:id="@+id/createAccountLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/backBtn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:background="@drawable/ic_left_arrow" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:text="@string/title_sign_up"
+            android:textColor="@color/green_dark"
+            android:textSize="28sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_marginTop="7dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/createAccountLayout">
+
+
+        <TextView
+            android:id="@+id/Sign_up"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_top_in_sign_up"
+            android:text="@string/title_login_password"
+            android:textSize="@dimen/button_text_size"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_top_in_sign_up"
+            android:background="@drawable/rounded_corners"
+            android:gravity="center">
+
+            <EditText
+                android:id="@+id/login"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:height="50dp"
+                android:background="@android:color/transparent"
+                android:backgroundTint="@null"
+                android:hint="@string/login"
+                android:maxLines="1"
+                android:textSize="@dimen/text_size_for_edit_text" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_top_in_sign_up"
+            android:background="@drawable/rounded_corners"
+            android:gravity="center">
+
+            <EditText
+                android:id="@+id/password"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:background="@android:color/transparent"
+                android:hint="@string/password"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:textSize="@dimen/text_size_for_edit_text" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/Form"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="35dp"
+            android:text="@string/title_form"
+            android:textSize="@dimen/button_text_size"
+            android:textStyle="bold" />
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginTop="@dimen/margin_top_in_sign_up"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/radioMale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="@string/gender_men"
+                android:textSize="@dimen/text_size_for_edit_text"/>
+
+            <RadioButton
+                android:id="@+id/radioFem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="@string/gender_fem"
+                android:textSize="@dimen/text_size_for_edit_text"/>
+        </RadioGroup>
+
+        <LinearLayout
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_top_in_sign_up"
+            android:background="@drawable/rounded_corners"
+            android:gravity="center">
+
+            <EditText
+                android:id="@+id/age"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:background="@android:color/transparent"
+                android:hint="@string/age"
+                android:inputType="number"
+                android:maxLines="1"
+                android:textSize="@dimen/text_size_for_edit_text" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_top_in_sign_up"
+            android:background="@drawable/rounded_corners"
+            android:gravity="center">
+
+            <EditText
+                android:id="@+id/weight"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:background="@android:color/transparent"
+                android:hint="@string/weight"
+                android:maxLines="1"
+                android:textSize="@dimen/text_size_for_edit_text" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_top_in_sign_up"
+            android:background="@drawable/rounded_corners"
+            android:gravity="center">
+
+            <EditText
+                android:id="@+id/height"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:background="@android:color/transparent"
+                android:hint="@string/height"
+                android:maxLines="1"
+                android:textSize="@dimen/text_size_for_edit_text" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_top_in_sign_up"
+            android:background="@drawable/rounded_corners"
+            android:gravity="center">
+
+            <EditText
+                android:id="@+id/physicalActivityRatio"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:background="@android:color/transparent"
+                android:hint="@string/physicalActivityRatio"
+                android:maxLines="1"
+                android:textSize="@dimen/text_size_for_edit_text" />
+        </LinearLayout>
+
+        <CheckBox
+            android:id="@+id/checkBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_top_in_sign_up"
+            android:text="@string/check_if_exercises"
+            android:textSize="@dimen/text_size_for_edit_text"/>
+
+        <Button
+            android:id="@+id/createBtn"
+            android:layout_width="320dp"
+            android:layout_height="60sp"
+            android:layout_marginTop="@dimen/margin_top_in_sign_up"
+            android:backgroundTint="@color/green"
+            android:text="@string/button_create"
+            android:textSize="@dimen/button_text_size"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">Diet_application</string>
+    <string name="app_name_ru">Рацион питания</string>
+    <string name="title_home">Расписание</string>
+    <string name="title_cart">Корзина</string>
+    <string name="title_products">Продукты</string>
+    <string name="title_profile">Профиль</string>
+
+    <string name="login">Логин</string>
+    <string name="password">Пароль</string>
+
+    <string name="button_create">СОЗДАТЬ</string>
+    <string name="title_sign_up">Создание аккаунта</string>
+    <string name="title_login_password">Придумайте логин и пароль:</string>
+    <string name="title_form">Заполните анкету:</string>
+    <string name="gender_men">Мужчина</string>
+    <string name="gender_fem">Женщина</string>
+    <string name="age">Возраст</string>
+    <string name="weight">Вес (в кг)</string>
+    <string name="height">Рост (в см)</string>
+    <string name="physicalActivityRatio">КФА</string>
+    <string name="check_if_exercises">Добавить в расписание упражнения?</string>
+
+
+    <string name="title_sign_in_hint">Войдите в аккаунт, чтобы продолжить.</string>
+    <string name="button_sign_in">ВОЙТИ</string>
+    <string name="button_exit">ВЫЙТИ</string>
+    <string name="create_hint">Нет аккаунта? Перейти на </string>
+</resources>

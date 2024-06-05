@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".ui.products.CRUDActivity">
+
+    <!--edit text for note title-->
+    <EditText
+        android:id="@+id/idEdtNoteName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:hint="Введите название"
+        android:textColor="@color/black"
+        android:textColorHint="@color/grey_hint" />
+
+    <!--edit text for note description-->
+    <EditText
+        android:id="@+id/idEdtNoteDesc"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/idBtn"
+        android:layout_below="@id/idEdtNoteName"
+        android:layout_margin="10dp"
+        android:background="@color/white"
+        android:gravity="start|top"
+        android:hint="Введите описание"
+        android:inputType="textMultiLine"
+        android:singleLine="false"
+        android:textColor="@color/black"
+        android:textColorHint="@color/grey_hint" />
+
+    <!--button for saving and updating a note-->
+    <Button
+        android:id="@+id/idBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="20dp"
+        android:text="Button"
+        android:textAllCaps="false"
+        android:textColor="@color/white" />
+
+</RelativeLayout>
