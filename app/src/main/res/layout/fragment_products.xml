@@ -8,7 +8,7 @@
 
     <!--recycler view for displaying all notes-->
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/notesRV"
+        android:id="@+id/list_of_products"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="8dp"
@@ -20,7 +20,7 @@
 
     <!--fab for adding a new note-->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/idFAB"
+        android:id="@+id/button_create"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"

@@ -10,6 +10,7 @@ import com.example.diet_application.MainDatabase
 import com.example.diet_application.Repository
 import com.example.diet_application.User
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
 class SignInViewModel (application: Application) : AndroidViewModel(application) {
@@ -32,5 +33,4 @@ class SignInViewModel (application: Application) : AndroidViewModel(application)
     fun checkLoginExists(login: String): LiveData<List<User>> {
         return repository.checkLoginExists(login)
     }
-    
 }

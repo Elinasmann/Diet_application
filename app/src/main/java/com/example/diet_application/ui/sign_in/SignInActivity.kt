@@ -20,7 +20,7 @@ class SignInActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         supportActionBar?.hide()
-
+//        this.deleteDatabase("diet_database")
         val viewModel =
             ViewModelProvider(this).get(SignInViewModel::class.java)
 
@@ -28,7 +28,7 @@ class SignInActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-        binding.loginBtn.setOnClickListener {
+        binding.buttonLogin.setOnClickListener {
 
             if (binding.login.text.toString().trim().isNotEmpty() &&
                 binding.password.text.toString().trim().isNotEmpty()

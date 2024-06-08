@@ -14,7 +14,7 @@ import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 
-@Database(entities = [User::class, Form::class, Product::class, Recipe::class, ProductsOfRecipe::class, ProductInCart::class, ScheduleOfRecipe::class],
+@Database(entities = [User::class, Product::class, StockProduct::class, Recipe::class, ProductsOfRecipe::class, ProductInCart::class, ScheduleOfRecipe::class],
     version = 1, exportSchema = true)
 abstract class MainDatabase : RoomDatabase() {
 
@@ -56,24 +56,6 @@ data class User(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val login: String,
     val password: String,
-)
-
-@Entity(
-    tableName = "forms",
-    foreignKeys = [
-        ForeignKey(
-            entity = User::class,
-            parentColumns = ["id"],
-            childColumns = ["user_id"],
-            onDelete = ForeignKey.CASCADE
-        )
-    ],
-    indices = [
-        Index("user_id", unique = true)
-    ]
-)
-data class Form(
-    @PrimaryKey @ColumnInfo(name = "user_id") val userId: Int,
     val gender: String,
     val age: Int,
     val weight: Float,
@@ -84,7 +66,10 @@ data class Form(
 
 
 @Entity(
-    tableName = "products"
+    tableName = "products",
+    indices = [
+        Index("title", unique = true)
+    ]
 )
 data class Product(
     @PrimaryKey(autoGenerate = true) val id: Int,
@@ -95,16 +80,33 @@ data class Product(
     val proteins: Int? = 0,
     val lipids: Int? = 0,
     val carbohydrates: Int? = 0
-    //@ColumnInfo(name = "expiration_date") val expirationDate: Boolean = false
 )
 
 @Entity(
-    tableName = "recipes"
+    tableName = "stock_products"
+)
+data class StockProduct(
+    @PrimaryKey(autoGenerate = true) val id: Int,
+    val title: String,
+    val description: String?,
+    @ColumnInfo(name = "expiration_date") val expirationDate: String
+)
+
+
+@Entity(
+    tableName = "recipes",
+    indices = [
+        Index("title", unique = true)
+    ]
 )
 data class Recipe(
     @PrimaryKey(autoGenerate = true) val id: Int,
     val title: String,
-    val description: String?
+    val description: String?,
+    val calories: Int? = 0,
+    val proteins: Int? = 0,
+    val lipids: Int? = 0,
+    val carbohydrates: Int? = 0
 )
 
 @Entity(

@@ -36,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/title_sign_in_hint"
                 android:textColor="@color/grey_hint"
-                android:textSize="15sp"
+                android:textSize="@dimen/text_size_for_edit_text"
                 android:textStyle="bold" />
 
         </LinearLayout>
@@ -64,7 +64,7 @@
         <LinearLayout
             android:layout_width="320dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="@dimen/margin_top"
             android:background="@drawable/rounded_corners"
             android:gravity="center">
 
@@ -81,10 +81,10 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/loginBtn"
+            android:id="@+id/button_login"
             android:layout_width="320dp"
             android:layout_height="60sp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="@dimen/margin_top"
             android:backgroundTint="@color/green"
             android:text="@string/button_sign_in"
             android:textSize="@dimen/button_text_size"

@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "615735e35972a58f7b82c2b0c5d39415",
+    "identityHash": "52b4ef4c6802422b3c3ea66ad07e53df",
     "entities": [
       {
         "tableName": "users",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `login` TEXT NOT NULL, `password` TEXT NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `login` TEXT NOT NULL, `password` TEXT NOT NULL, `gender` TEXT NOT NULL, `age` INTEGER NOT NULL, `weight` REAL NOT NULL, `height` REAL NOT NULL, `physical_activity_ratio` REAL NOT NULL, `do_exercises` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -24,36 +24,6 @@
             "fieldPath": "password",
             "columnName": "password",
             "affinity": "TEXT",
-            "notNull": true
-          }
-        ],
-        "primaryKey": {
-          "autoGenerate": true,
-          "columnNames": [
-            "id"
-          ]
-        },
-        "indices": [
-          {
-            "name": "index_users_login",
-            "unique": true,
-            "columnNames": [
-              "login"
-            ],
-            "orders": [],
-            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_users_login` ON `${TABLE_NAME}` (`login`)"
-          }
-        ],
-        "foreignKeys": []
-      },
-      {
-        "tableName": "forms",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`user_id` INTEGER NOT NULL, `gender` TEXT NOT NULL, `age` INTEGER NOT NULL, `weight` REAL NOT NULL, `height` REAL NOT NULL, `physical_activity_ratio` REAL NOT NULL, `do_exercises` INTEGER NOT NULL, PRIMARY KEY(`user_id`), FOREIGN KEY(`user_id`) REFERENCES `users`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
-        "fields": [
-          {
-            "fieldPath": "userId",
-            "columnName": "user_id",
-            "affinity": "INTEGER",
             "notNull": true
           },
           {
@@ -94,35 +64,23 @@
           }
         ],
         "primaryKey": {
-          "autoGenerate": false,
+          "autoGenerate": true,
           "columnNames": [
-            "user_id"
+            "id"
           ]
         },
         "indices": [
           {
-            "name": "index_forms_user_id",
+            "name": "index_users_login",
             "unique": true,
             "columnNames": [
-              "user_id"
+              "login"
             ],
             "orders": [],
-            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_forms_user_id` ON `${TABLE_NAME}` (`user_id`)"
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_users_login` ON `${TABLE_NAME}` (`login`)"
           }
         ],
-        "foreignKeys": [
-          {
-            "table": "users",
-            "onDelete": "CASCADE",
-            "onUpdate": "NO ACTION",
-            "columns": [
-              "user_id"
-            ],
-            "referencedColumns": [
-              "id"
-            ]
-          }
-        ]
+        "foreignKeys": []
       },
       {
         "tableName": "products",
@@ -183,12 +141,22 @@
             "id"
           ]
         },
-        "indices": [],
+        "indices": [
+          {
+            "name": "index_products_title",
+            "unique": true,
+            "columnNames": [
+              "title"
+            ],
+            "orders": [],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_products_title` ON `${TABLE_NAME}` (`title`)"
+          }
+        ],
         "foreignKeys": []
       },
       {
-        "tableName": "recipes",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `title` TEXT NOT NULL, `description` TEXT)",
+        "tableName": "stock_products",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `title` TEXT NOT NULL, `description` TEXT, `expiration_date` TEXT NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -207,6 +175,12 @@
             "columnName": "description",
             "affinity": "TEXT",
             "notNull": false
+          },
+          {
+            "fieldPath": "expirationDate",
+            "columnName": "expiration_date",
+            "affinity": "TEXT",
+            "notNull": true
           }
         ],
         "primaryKey": {
@@ -216,6 +190,72 @@
           ]
         },
         "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "recipes",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `title` TEXT NOT NULL, `description` TEXT, `calories` INTEGER, `proteins` INTEGER, `lipids` INTEGER, `carbohydrates` INTEGER)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "title",
+            "columnName": "title",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "description",
+            "columnName": "description",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "calories",
+            "columnName": "calories",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "proteins",
+            "columnName": "proteins",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "lipids",
+            "columnName": "lipids",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "carbohydrates",
+            "columnName": "carbohydrates",
+            "affinity": "INTEGER",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_recipes_title",
+            "unique": true,
+            "columnNames": [
+              "title"
+            ],
+            "orders": [],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_recipes_title` ON `${TABLE_NAME}` (`title`)"
+          }
+        ],
         "foreignKeys": []
       },
       {
@@ -427,7 +467,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '615735e35972a58f7b82c2b0c5d39415')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '52b4ef4c6802422b3c3ea66ad07e53df')"
     ]
   }
 }

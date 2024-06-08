@@ -1,20 +1,21 @@
 package com.example.diet_application
 
 import androidx.lifecycle.LiveData
+import kotlinx.coroutines.flow.Flow
 
 class Repository(private val Dao: MainDao) {
 
-    val allProducts: LiveData<List<Product>> = Dao.getAllProducts()
+    val allStockProducts: LiveData<List<StockProduct>> = Dao.getAllStockProducts()
 
-    suspend fun insert(item: Product) {
+    suspend fun insert(item: StockProduct) {
         Dao.insert(item)
     }
 
-    suspend fun delete(item: Product) {
+    suspend fun delete(item: StockProduct) {
         Dao.delete(item)
     }
 
-    suspend fun update(item: Product) {
+    suspend fun update(item: StockProduct) {
         Dao.update(item)
     }
 
@@ -34,5 +35,4 @@ class Repository(private val Dao: MainDao) {
     ): LiveData<List<User>> {
         return Dao.checkIfUserIsRegistered(login, password)
     }
-
 }

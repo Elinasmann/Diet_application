@@ -6,5 +6,8 @@
     <dimen name="button_text_size">16sp</dimen>
     <dimen name="text_size_for_edit_text">15sp</dimen>
 
-    <dimen name="margin_top_in_sign_up">20dp</dimen>
+    <dimen name="margin_top">20dp</dimen>
+    <dimen name="general_margin">10dp</dimen>
+
+    <dimen name="general_radius_corners">5dp</dimen>
 </resources>

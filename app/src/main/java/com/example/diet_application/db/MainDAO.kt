@@ -7,20 +7,21 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface MainDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insert(item : Product)
+    suspend fun insert(item : StockProduct)
 
     @Update
-    suspend fun update(item: Product)
+    suspend fun update(item: StockProduct)
 
     @Delete
-    suspend fun delete(item: Product)
+    suspend fun delete(item: StockProduct)
 
-    @Query("SELECT * FROM products")
-    fun getAllProducts(): LiveData<List<Product>>
+    @Query("SELECT * FROM stock_products ORDER BY id ASC")
+    fun getAllStockProducts(): LiveData<List<StockProduct>>
 
 
 
@@ -36,5 +37,4 @@ interface MainDao {
         login: String,
         password: String
     ): LiveData<List<User>>
-
 }

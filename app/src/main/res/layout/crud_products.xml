@@ -7,41 +7,80 @@
     android:background="@color/white"
     tools:context=".ui.products.CRUDActivity">
 
-    <!--edit text for note title-->
-    <EditText
-        android:id="@+id/idEdtNoteName"
+    <ImageView
+        android:id="@+id/backBtn"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:background="@drawable/ic_left_arrow"
+        android:layout_marginStart="@dimen/general_margin"
+        android:layout_marginTop="@dimen/general_margin"
+        android:layout_marginBottom="30dp" />
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:hint="Введите название"
-        android:textColor="@color/black"
-        android:textColorHint="@color/grey_hint" />
+        android:layout_margin="@dimen/general_margin"
+        android:orientation="vertical"
+        android:layout_below="@id/backBtn" >
 
-    <!--edit text for note description-->
-    <EditText
-        android:id="@+id/idEdtNoteDesc"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@id/idBtn"
-        android:layout_below="@id/idEdtNoteName"
-        android:layout_margin="10dp"
-        android:background="@color/white"
-        android:gravity="start|top"
-        android:hint="Введите описание"
-        android:inputType="textMultiLine"
-        android:singleLine="false"
-        android:textColor="@color/black"
-        android:textColorHint="@color/grey_hint" />
+        <EditText
+            android:id="@+id/product_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/product_name"
+            android:textColor="@color/black"
+            android:textColorHint="@color/grey_hint"
+            android:textSize="@dimen/text_size_for_edit_text" />
 
-    <!--button for saving and updating a note-->
-    <Button
-        android:id="@+id/idBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="20dp"
-        android:text="Button"
-        android:textAllCaps="false"
-        android:textColor="@color/white" />
+        <EditText
+            android:id="@+id/expiration_date"
+            android:inputType="date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_top"
+            android:hint="@string/expiration_date"
+            android:textColor="@color/black"
+            android:textColorHint="@color/grey_hint"
+            android:ems="10"
+            android:textSize="@dimen/text_size_for_edit_text" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/margin_top"
+            android:background="@drawable/rounded_corners"
+            android:padding="5dp">
+
+            <EditText
+                android:id="@+id/description"
+                android:layout_width="match_parent"
+                android:background="@android:color/transparent"
+                android:layout_height="150dp"
+                android:gravity="start|top"
+                android:hint="@string/description"
+                android:inputType="textMultiLine"
+                android:singleLine="false"
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey_hint"
+                android:textSize="@dimen/text_size_for_edit_text" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/button_save"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/general_margin"
+            android:layout_marginTop="@dimen/margin_top"
+            android:text="@string/save"
+            android:textAllCaps="false"
+            android:textSize="@dimen/button_text_size"
+            android:textStyle="bold"
+            android:backgroundTint="@color/green" />
+
+    </LinearLayout>
+
+
 
 </RelativeLayout>

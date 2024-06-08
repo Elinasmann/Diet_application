@@ -6,6 +6,7 @@
     <string name="title_products">Продукты</string>
     <string name="title_profile">Профиль</string>
 
+
     <string name="login">Логин</string>
     <string name="password">Пароль</string>
 
@@ -21,9 +22,16 @@
     <string name="physicalActivityRatio">КФА</string>
     <string name="check_if_exercises">Добавить в расписание упражнения?</string>
 
-
     <string name="title_sign_in_hint">Войдите в аккаунт, чтобы продолжить.</string>
     <string name="button_sign_in">ВОЙТИ</string>
     <string name="button_exit">ВЫЙТИ</string>
     <string name="create_hint">Нет аккаунта? Перейти на </string>
+
+
+    <string name="product_name">Введите название</string>
+    <string name="expiration_date">Введите дату срока годности (Формат: ДД/ММ/ГГГГ)</string>
+    <string name="description">Введите заметки (при необходимости)</string>
+    <string name="save">СОХРАНИТЬ</string>
+
+    <string name="expiration_date_hint">Годен до: </string>
 </resources>

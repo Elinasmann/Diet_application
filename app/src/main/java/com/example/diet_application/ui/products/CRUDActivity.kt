@@ -10,68 +10,73 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.diet_application.MainActivity
 import com.example.diet_application.Product
 import com.example.diet_application.R
+import com.example.diet_application.StockProduct
+import com.example.diet_application.databinding.CrudProductsBinding
+import com.example.diet_application.databinding.SignInBinding
+import com.example.diet_application.ui.sign_in.SignInActivity
+import java.text.SimpleDateFormat
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 class CRUDActivity : AppCompatActivity() {
-    // variables for UI components.
-    lateinit var noteTitleEdt: EditText
-    lateinit var noteEdt: EditText
-    lateinit var saveBtn: Button
-
-    // variable for viewmodal and integer for product id
-    lateinit var viewModal: ProductsViewModel
-    var noteID = -1;
+    private lateinit var binding: CrudProductsBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.crud_products)
         supportActionBar?.hide()
 
         // initializing view modal
-        viewModal = ViewModelProvider(
+        val viewModel = ViewModelProvider(
             this,
             ViewModelProvider.AndroidViewModelFactory.getInstance(application)
         ).get(ProductsViewModel::class.java)
 
-        // initializing all variables
-        noteTitleEdt = findViewById(R.id.idEdtNoteName)
-        noteEdt = findViewById(R.id.idEdtNoteDesc)
-        saveBtn = findViewById(R.id.idBtn)
+        binding = CrudProductsBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
+        var productID: Int = -1
         // getting data passed via an intent
-        val noteType = intent.getStringExtra("noteType")
-        if (noteType.equals("Edit")) {
+        val getType = intent.getStringExtra("itemType")
+        if (getType.equals("Edit")) {
             //   setting data to edit text.
-            val noteTitle = intent.getStringExtra("noteTitle")
-            val noteDescription = intent.getIntExtra("noteDescription", -1)
-            noteID = intent.getIntExtra("noteId", -1)
-            saveBtn.setText("Update Note")
-            noteTitleEdt.setText(noteTitle)
-            noteEdt.setText(noteDescription.toString())
-        } else {
-            saveBtn.setText("Save Note")
+            val title = intent.getStringExtra("itemTitle")
+            val date = intent.getStringExtra("itemDate")
+            val description = intent.getStringExtra("itemDescription")
+            productID = intent.getIntExtra("itemId", -1)
+            binding.productName.setText(title)
+            binding.expirationDate.setText(date)
+            if (description.toString().isNotEmpty())
+                binding.description.setText(description)
         }
 
         // adding click listener to save button
-        saveBtn.setOnClickListener {
+        binding.buttonSave.setOnClickListener {
+            val reg = ("(0[1-9]|[12][0-9]|3[01])\\/(0[1-9]|1[1,2])\\/(19|20)\\d{2}").toRegex()
             // getting title and desc from edit text
-            val noteTitle = noteTitleEdt.text.toString()
-            val noteDescription = noteEdt.text.toString().toInt()
+            val title = binding.productName.text.toString()
+            val date = binding.expirationDate.text.toString()
+            val description = binding.description.text.toString()
             // checking the type and then saving or updating the data
-            if (noteType.equals("Edit")) {
-                if (noteTitle.isNotEmpty() && noteDescription != 0) {
-                    val updatedNote = Product(noteID, noteTitle, null, null, noteDescription)
-                    viewModal.updateNote(updatedNote)
-                    Toast.makeText(this, "Note Updated..", Toast.LENGTH_LONG).show()
-                }
+            if (!(title.isNotEmpty() && reg.matches(date))) {
+                Toast.makeText(this, "Данные введены неправильно", Toast.LENGTH_LONG).show()
             } else {
-                if (noteTitle.isNotEmpty() && noteDescription != 0) {
+                if (getType.equals("Edit")) {
+                    val updatedProduct = StockProduct(productID, title, description, date)
+                    viewModel.update(updatedProduct)
+                    Toast.makeText(this, "Изменения сохранены", Toast.LENGTH_LONG).show()
+                } else {
                     // if the string is not empty > calling a add method to add data to room database
-                    viewModal.addNote(Product(0, noteTitle, null, null, noteDescription))
-                    Toast.makeText(this, "$noteTitle Added", Toast.LENGTH_LONG).show()
+                    viewModel.add(StockProduct(0, title, description, date))
+                    Toast.makeText(this, "$title добавлен", Toast.LENGTH_LONG).show()
                 }
-            }
 
+                val showContent = Intent(this, MainActivity::class.java)
+                startActivity(showContent)
+                this.finish()
+            }
+        }
+
+        binding.backBtn.setOnClickListener {
             val showContent = Intent(this, MainActivity::class.java)
             startActivity(showContent)
             this.finish()
