@@ -35,21 +35,21 @@ class CartFragment : Fragment() {
         _binding = FragmentCartBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textCart
-        cartViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
-
-        val listView: ListView = binding.listForCart
-        cartViewModel.userList.observe(viewLifecycleOwner) {
-            listView.adapter = BoxAdapter( requireContext(),  it )
-        }
-
-        listView.setOnItemClickListener(){adapterView, view, position, id ->
-            val itemAtPos = adapterView.getItemAtPosition(position)
-            val itemIdAtPos = adapterView.getItemIdAtPosition(position)
-            Toast.makeText(requireContext(), "Click on item at $itemAtPos its item id $itemIdAtPos", Toast.LENGTH_LONG).show()
-        }
+//        val textView: TextView = binding.textCart
+//        cartViewModel.text.observe(viewLifecycleOwner) {
+//            textView.text = it
+//        }
+//
+//        val listView: ListView = binding.listForCart
+//        cartViewModel.userList.observe(viewLifecycleOwner) {
+//            listView.adapter = BoxAdapter( requireContext(),  it )
+//        }
+//
+//        listView.setOnItemClickListener(){adapterView, view, position, id ->
+//            val itemAtPos = adapterView.getItemAtPosition(position)
+//            val itemIdAtPos = adapterView.getItemIdAtPosition(position)
+//            Toast.makeText(requireContext(), "Click on item at $itemAtPos its item id $itemIdAtPos", Toast.LENGTH_LONG).show()
+//        }
 
         return root
     }

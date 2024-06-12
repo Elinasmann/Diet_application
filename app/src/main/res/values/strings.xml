@@ -29,7 +29,7 @@
 
 
     <string name="product_name">Введите название</string>
-    <string name="expiration_date">Введите дату срока годности (Формат: ДД/ММ/ГГГГ)</string>
+    <string name="expiration_date">Введите дату срока годности (ДД/ММ/ГГГГ)</string>
     <string name="description">Введите заметки (при необходимости)</string>
     <string name="save">СОХРАНИТЬ</string>
 

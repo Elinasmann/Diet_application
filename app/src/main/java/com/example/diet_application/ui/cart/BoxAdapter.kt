@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.CheckBox
-import android.widget.CompoundButton
 import android.widget.TextView
 import com.example.diet_application.R
 
@@ -28,10 +27,10 @@ class BoxAdapter(private val context: Context, private val users: List<User>) : 
     }
     override fun getView(position: Int, CartViewModel: View?, parent: ViewGroup): View? {
         var convertView = CartViewModel
-        convertView = LayoutInflater.from(context).inflate(R.layout.list_item, parent, false)
-        name = convertView.findViewById(R.id.name_cart)
-        contactNum = convertView.findViewById(R.id.desc_cart)
-        box = convertView.findViewById(R.id.cbBox)
+        convertView = LayoutInflater.from(context).inflate(R.layout.cart_item, parent, false)
+//        name = convertView.findViewById(R.id.name_cart)
+//        contactNum = convertView.findViewById(R.id.desc_cart)
+//        box = convertView.findViewById(R.id.cbBox)
         name.text = users[position].name
         contactNum.text = users[position].description
         return convertView

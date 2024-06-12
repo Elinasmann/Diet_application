@@ -11,11 +11,15 @@ import androidx.room.PrimaryKey
 import androidx.room.Query
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverter
+import androidx.room.TypeConverters
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
+import java.util.Date
 
-@Database(entities = [User::class, Product::class, StockProduct::class, Recipe::class, ProductsOfRecipe::class, ProductInCart::class, ScheduleOfRecipe::class],
+@Database(entities = [User::class, UserResults::class, Product::class, StockProduct::class, Recipe::class, ProductsOfRecipe::class, ProductInCart::class, ScheduleOfRecipe::class],
     version = 1, exportSchema = true)
+@TypeConverters(Converters::class)
 abstract class MainDatabase : RoomDatabase() {
 
     abstract fun getDao(): MainDao
@@ -35,6 +39,7 @@ abstract class MainDatabase : RoomDatabase() {
                     MainDatabase::class.java,
                     "diet_database"
                 )
+                    .createFromAsset("asset.db")
                     .fallbackToDestructiveMigration()
                     .build()
                 INSTANCE = instance
@@ -42,6 +47,18 @@ abstract class MainDatabase : RoomDatabase() {
                 instance
             }
         }
+    }
+}
+
+class Converters {
+    @TypeConverter
+    fun fromTimestamp(value: Long): Date {
+        return value.let { Date(it) }
+    }
+
+    @TypeConverter
+    fun dateToTimestamp(date: Date): Long {
+        return date.time.toLong()
     }
 }
 
@@ -63,6 +80,27 @@ data class User(
     @ColumnInfo(name = "physical_activity_ratio") val physicalActivityRatio: Float,
     @ColumnInfo(name = "do_exercises") val doExercises: Boolean = false
 )
+@Entity(
+    tableName = "user_results",
+    foreignKeys = [
+        ForeignKey(
+            entity = User::class,
+            parentColumns = ["id"],
+            childColumns = ["user_id"],
+            onDelete = ForeignKey.CASCADE
+        )
+    ],
+    indices = [
+        Index("user_id", unique = true)
+    ]
+)
+data class UserResults(
+    @PrimaryKey @ColumnInfo(name = "user_id") val userId: Int = 0,
+    @ColumnInfo(name = "calories") val calories: Float,
+    @ColumnInfo(name = "proteins") val proteins: Float,
+    @ColumnInfo(name = "lipids") val lipids: Float,
+    @ColumnInfo(name = "carbohydrates") val carbohydrates: Float
+)
 
 
 @Entity(
@@ -74,19 +112,26 @@ data class User(
 data class Product(
     @PrimaryKey(autoGenerate = true) val id: Int,
     val title: String,
-    @ColumnInfo(name = "amount_of_days") val amountOfDays: Int? = 0,
-    val measure: String?,
-    val calories: Int? = 0,
-    val proteins: Int? = 0,
-    val lipids: Int? = 0,
-    val carbohydrates: Int? = 0
+    val calories: Float,
+    val proteins: Float,
+    val lipids: Float,
+    val carbohydrates: Float
 )
 
 @Entity(
-    tableName = "stock_products"
+    tableName = "stock_products",
+    foreignKeys = [
+        ForeignKey(
+            entity = User::class,
+            parentColumns = ["id"],
+            childColumns = ["user_id"],
+            onDelete = ForeignKey.CASCADE
+        )
+    ]
 )
 data class StockProduct(
     @PrimaryKey(autoGenerate = true) val id: Int,
+    @ColumnInfo(name = "user_id") val userId: Int? = 0,
     val title: String,
     val description: String?,
     @ColumnInfo(name = "expiration_date") val expirationDate: String
@@ -102,11 +147,11 @@ data class StockProduct(
 data class Recipe(
     @PrimaryKey(autoGenerate = true) val id: Int,
     val title: String,
-    val description: String?,
-    val calories: Int? = 0,
-    val proteins: Int? = 0,
-    val lipids: Int? = 0,
-    val carbohydrates: Int? = 0
+    val description: String,
+    val calories: Float,
+    val proteins: Float,
+    val lipids: Float,
+    val carbohydrates: Float
 )
 
 @Entity(
@@ -130,7 +175,8 @@ data class Recipe(
 data class ProductsOfRecipe(
     @ColumnInfo(name = "product_id") val productId: Int,
     @ColumnInfo(name = "recipe_id") val recipeId: Int,
-    @ColumnInfo(name = "measure_amount") val measureAmount: Int
+    @ColumnInfo(name = "measure_amount") val measureAmount: Float,
+    @ColumnInfo(name = "measure_title") val measureTitle: String
 )
 
 
@@ -156,7 +202,6 @@ data class ProductInCart(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     @ColumnInfo(name = "user_id") val userId: Int,
     @ColumnInfo(name = "product_id") val productId: Int,
-    @ColumnInfo(name = "measure_amount") val measureAmount: Int,
     @ColumnInfo(name = "check_buy") val checkBuy: Boolean = false
 )
 
@@ -182,5 +227,6 @@ data class ScheduleOfRecipe(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     @ColumnInfo(name = "user_id") val userId: Int,
     @ColumnInfo(name = "recipe_id") val recipeId: Int,
-    val date: String
+    val date: Date
 )
+

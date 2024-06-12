@@ -61,12 +61,12 @@ class CRUDActivity : AppCompatActivity() {
                 Toast.makeText(this, "Данные введены неправильно", Toast.LENGTH_LONG).show()
             } else {
                 if (getType.equals("Edit")) {
-                    val updatedProduct = StockProduct(productID, title, description, date)
+                    val updatedProduct = StockProduct(productID, null, title, description, date)
                     viewModel.update(updatedProduct)
                     Toast.makeText(this, "Изменения сохранены", Toast.LENGTH_LONG).show()
                 } else {
                     // if the string is not empty > calling a add method to add data to room database
-                    viewModel.add(StockProduct(0, title, description, date))
+                    viewModel.add(StockProduct(0, null, title, description, date))
                     Toast.makeText(this, "$title добавлен", Toast.LENGTH_LONG).show()
                 }
 
