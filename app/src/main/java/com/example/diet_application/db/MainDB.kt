@@ -17,7 +17,8 @@ import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import java.util.Date
 
-@Database(entities = [User::class, UserResults::class, Product::class, StockProduct::class, Recipe::class, ProductsOfRecipe::class, ProductInCart::class, ScheduleOfRecipe::class],
+@Database(entities = [User::class, UserResults::class, Product::class, StockProduct::class, Recipe::class,
+    ProductsOfRecipe::class, ProductInCart::class, ScheduleOfRecipe::class, Exercise::class, ScheduleOfExercise::class],
     version = 1, exportSchema = true)
 @TypeConverters(Converters::class)
 abstract class MainDatabase : RoomDatabase() {
@@ -39,7 +40,7 @@ abstract class MainDatabase : RoomDatabase() {
                     MainDatabase::class.java,
                     "diet_database"
                 )
-                    .createFromAsset("asset.db")
+//                    .createFromAsset("asset.db")
                     .fallbackToDestructiveMigration()
                     .build()
                 INSTANCE = instance
@@ -115,7 +116,8 @@ data class Product(
     val calories: Float,
     val proteins: Float,
     val lipids: Float,
-    val carbohydrates: Float
+    val carbohydrates: Float,
+    @ColumnInfo(name = "not_raw") val notRaw: Boolean
 )
 
 @Entity(
@@ -209,9 +211,9 @@ data class ProductInCart(
     tableName = "schedule_of_recipes",
     foreignKeys = [
         ForeignKey(
-        entity = User::class,
-        parentColumns = ["id"],
-        childColumns = ["user_id"]
+            entity = User::class,
+            parentColumns = ["id"],
+            childColumns = ["user_id"]
         ),
         ForeignKey(
             entity = Recipe::class,
@@ -230,3 +232,38 @@ data class ScheduleOfRecipe(
     val date: Date
 )
 
+
+@Entity(
+    tableName = "exercises"
+)
+data class Exercise(
+    @PrimaryKey(autoGenerate = true) val id: Int = 0,
+    val title: String,
+    val type: String,
+    val description: String
+)
+@Entity(
+    tableName = "schedule_of_exercises",
+    foreignKeys = [
+        ForeignKey(
+            entity = User::class,
+            parentColumns = ["id"],
+            childColumns = ["user_id"]
+        ),
+        ForeignKey(
+            entity = Exercise::class,
+            parentColumns = ["id"],
+            childColumns = ["exercise_id"]
+        )
+    ],
+    indices = [
+        Index("user_id", "date")
+    ]
+)
+data class ScheduleOfExercise(
+    @PrimaryKey(autoGenerate = true) val id: Int = 0,
+    @ColumnInfo(name = "user_id") val userId: Int,
+    @ColumnInfo(name = "exercise_id") val recipeId: Int,
+    val minutes: Float,
+    val date: Date
+)

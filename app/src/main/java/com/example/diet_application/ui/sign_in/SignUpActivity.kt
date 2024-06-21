@@ -50,39 +50,37 @@ class SignUpActivity : AppCompatActivity() {
                             reg.matches(binding.height.text.toString()) &&
                             reg.matches(binding.physicalActivityRatio.text.toString())
                         ) {
-                            if (binding.age.text.toString().toInt() < 16 || binding.age.text.toString().toInt() > 80) {
+                            if (binding.age.text.toString().toInt() < 18 || binding.age.text.toString().toInt() > 80) {
                                 Toast.makeText(
                                     this,
-                                    "Возраст введен неправильно. Введите число от 16 до 80",
+                                    "Возраст введен неправильно. Введите число от 18 до 80",
                                     Toast.LENGTH_SHORT
                                 ).show()
-                            } else if (binding.weight.text.toString().toFloat() < 40 || binding.weight.text.toString().toFloat() > 200) {
+                            } else if (binding.weight.text.toString().toFloat() < 35 || binding.weight.text.toString().toFloat() > 145) {
                                 Toast.makeText(
                                     this,
-                                    "Вес введен неправильно. Введите число от 40 до 200",
+                                    "Вес введен неправильно. Введите число от 35 до 145",
                                     Toast.LENGTH_SHORT
                                 ).show()
-                            } else if (binding.height.text.toString().toFloat() < 140 || binding.height.text.toString().toFloat() > 220) {
+                            } else if (binding.height.text.toString().toFloat() < 145 || binding.height.text.toString().toFloat() > 210) {
                                 Toast.makeText(
                                     this,
-                                    "Рост введен неправильно. Введите число от 140 до 220",
+                                    "Рост введен неправильно. Введите число от 145 до 210",
                                     Toast.LENGTH_SHORT
                                 ).show()
-                            } else if (binding.physicalActivityRatio.text.toString().toFloat() < 1 || binding.physicalActivityRatio.text.toString().toFloat() > 3) {
+                            } else if (binding.physicalActivityRatio.text.toString().toFloat() < 1.2 || binding.physicalActivityRatio.text.toString().toFloat() > 1.9) {
                                 Toast.makeText(
                                     this,
-                                    "КФА введен неправильно. Введите число от 1 до 3",
+                                    "КФА введен неправильно. Введите число от 1.2 до 1.9",
                                     Toast.LENGTH_SHORT
                                 ).show()
                             } else {
-                                val idGender = binding.radio.checkedRadioButtonId
-
                                 viewModel.insert(
                                     User(
                                         id = 0,
                                         login = binding.login.text.toString().trim(),
                                         password = binding.password.text.toString().trim(),
-                                        gender = if (idGender == 0) {
+                                        gender = if (binding.Male.isChecked) {
                                             "male"
                                         } else {
                                             "female"

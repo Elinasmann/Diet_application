@@ -3,8 +3,10 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
+    <dimen name="titles">18sp</dimen>
     <dimen name="button_text_size">16sp</dimen>
     <dimen name="text_size_for_edit_text">15sp</dimen>
+    <dimen name="BDU">13sp</dimen>
 
     <dimen name="margin_top">20dp</dimen>
     <dimen name="general_margin">10dp</dimen>

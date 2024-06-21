@@ -25,7 +25,7 @@ class ProductsFragment : Fragment(), ProductClickInterface, ProductClickDeleteIn
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
-    lateinit var viewModel : ProductsViewModel
+    private lateinit var viewModel : ProductsViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,

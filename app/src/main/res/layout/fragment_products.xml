@@ -6,19 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".ui.products.ProductsFragment">
 
-    <!--recycler view for displaying all notes-->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list_of_products"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:listitem="@layout/recycler_item" />
 
-    <!--fab for adding a new note-->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/button_create"
         android:layout_width="wrap_content"
@@ -26,7 +23,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="32dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:src="@drawable/add_24dp_fill0_wght400_grad0_opsz24"
         app:backgroundTint="@color/green_dark"

@@ -53,6 +53,7 @@ class SignInActivity : AppCompatActivity() {
                             intent.putExtra("password", binding.password.text.toString().trim())
                             intent.putExtra("id", loginDetailsList[0].id.toString())
                             startActivity(intent)
+                            this.finish()
                         } else {
                             Toast.makeText(
                                 this,

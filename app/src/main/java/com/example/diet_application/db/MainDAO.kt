@@ -24,7 +24,6 @@ interface MainDao {
     fun getAllStockProducts(): LiveData<List<StockProduct>>
 
 
-
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(item: User)
 
@@ -37,4 +36,26 @@ interface MainDao {
         login: String,
         password: String
     ): LiveData<List<User>>
+
+
+    @Query("SELECT * FROM recipes WHERE id LIKE :id")
+    fun getRecipeById(id: Int): LiveData<Recipe>
+    @Query("SELECT * FROM recipes")
+    fun getAllRecipes(): LiveData<List<Recipe>>
+    @Query("SELECT * FROM products_of_recipe WHERE recipe_id LIKE :id")
+    fun getIngredientsByRecipeId(id: Int): LiveData<List<ProductsOfRecipe>>
+
+
+    @Query("SELECT * FROM products")
+    fun getAllProducts(): LiveData<List<Product>>
+    @Query("SELECT title FROM products WHERE id LIKE :id")
+    suspend fun getProductTitleById(id: Int): String
+    @Query("SELECT product_id FROM products_of_recipe WHERE recipe_id LIKE :id")
+    fun getProductOfRecipeByRecipeId(id: Int): LiveData<List<Int>>
+    @Query("SELECT * FROM products_in_cart WHERE user_id LIKE :id")
+    fun getAllProductsInCartByUserId(id: Int): LiveData<List<ProductInCart>>
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insert(item: ProductInCart)
+    @Update
+    suspend fun update(item: ProductInCart)
 }
