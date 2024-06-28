@@ -2,21 +2,12 @@ package com.example.diet_application.ui.products
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.diet_application.MainActivity
-import com.example.diet_application.Product
-import com.example.diet_application.R
-import com.example.diet_application.StockProduct
+import com.example.diet_application.db.StockProduct
 import com.example.diet_application.databinding.CrudProductsBinding
-import com.example.diet_application.databinding.SignInBinding
-import com.example.diet_application.ui.sign_in.SignInActivity
-import java.text.SimpleDateFormat
-import java.time.format.DateTimeFormatter
-import java.util.*
 
 class CRUDActivity : AppCompatActivity() {
     private lateinit var binding: CrudProductsBinding
@@ -61,12 +52,12 @@ class CRUDActivity : AppCompatActivity() {
                 Toast.makeText(this, "Данные введены неправильно", Toast.LENGTH_LONG).show()
             } else {
                 if (getType.equals("Edit")) {
-                    val updatedProduct = StockProduct(productID, null, title, description, date)
+                    val updatedProduct = StockProduct(productID, 0, title, description, date)
                     viewModel.update(updatedProduct)
                     Toast.makeText(this, "Изменения сохранены", Toast.LENGTH_LONG).show()
                 } else {
                     // if the string is not empty > calling a add method to add data to room database
-                    viewModel.add(StockProduct(0, null, title, description, date))
+                    viewModel.add(StockProduct(0, 0, title, description, date))
                     Toast.makeText(this, "$title добавлен", Toast.LENGTH_LONG).show()
                 }
 

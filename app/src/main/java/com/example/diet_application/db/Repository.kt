@@ -1,42 +1,53 @@
 package com.example.diet_application
 
 import androidx.lifecycle.LiveData
-import kotlinx.coroutines.flow.Flow
+import com.example.diet_application.db.Exercise
+import com.example.diet_application.db.Product
+import com.example.diet_application.db.ProductInCart
+import com.example.diet_application.db.ProductsOfRecipe
+import com.example.diet_application.db.Recipe
+import com.example.diet_application.db.StockProduct
+import com.example.diet_application.db.User
+import com.example.diet_application.db.UserResults
 
 class Repository(private val Dao: MainDao) {
 
     val allStockProducts: LiveData<List<StockProduct>> = Dao.getAllStockProducts()
-
     suspend fun insert(item: StockProduct) {
         Dao.insert(item)
     }
-
     suspend fun delete(item: StockProduct) {
         Dao.delete(item)
     }
-
     suspend fun update(item: StockProduct) {
         Dao.update(item)
     }
 
 
-
     suspend fun insert(item: User) {
         Dao.insert(item)
     }
-
     fun checkLoginExists(login: String): LiveData<List<User>> {
         return Dao.checkLoginExists(login)
     }
-
     fun checkIfUserIsRegistered(
         login: String,
         password: String
     ): LiveData<List<User>> {
         return Dao.checkIfUserIsRegistered(login, password)
     }
+    fun getUserLoginById(id: Int): LiveData<String> {
+        return Dao.getUserLoginById(id)
+    }
+    fun getUserResultsById(id: Int): LiveData<UserResults> {
+        return Dao.getUserResultsById(id)
+    }
+    suspend fun insert(item: UserResults) {
+        Dao.insert(item)
+    }
 
 
+    val allExercises: LiveData<List<Exercise>> = Dao.getAllExercises()
     val allRecipes: LiveData<List<Recipe>> = Dao.getAllRecipes()
     fun getRecipeById(id: Int): LiveData<Recipe> {
         return Dao.getRecipeById(id)

@@ -7,9 +7,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.diet_application.Product
 import com.example.diet_application.R
-import com.example.diet_application.StockProduct
+import com.example.diet_application.db.StockProduct
 
 class ProductAdapter(
     val context: Context,

@@ -1,20 +1,17 @@
-package com.example.diet_application
+package com.example.diet_application.db
 
 import android.content.Context
 import androidx.room.ColumnInfo
-import androidx.room.Dao
 import androidx.room.Database
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.Index
 import androidx.room.PrimaryKey
-import androidx.room.Query
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverter
 import androidx.room.TypeConverters
-import androidx.room.migration.Migration
-import androidx.sqlite.db.SupportSQLiteDatabase
+import com.example.diet_application.MainDao
 import java.util.Date
 
 @Database(entities = [User::class, UserResults::class, Product::class, StockProduct::class, Recipe::class,
@@ -133,9 +130,9 @@ data class Product(
 )
 data class StockProduct(
     @PrimaryKey(autoGenerate = true) val id: Int,
-    @ColumnInfo(name = "user_id") val userId: Int? = 0,
+    @ColumnInfo(name = "user_id") val userId: Int = 0,
     val title: String,
-    val description: String?,
+    val description: String = "",
     @ColumnInfo(name = "expiration_date") val expirationDate: String
 )
 
@@ -219,6 +216,11 @@ data class ProductInCart(
             entity = Recipe::class,
             parentColumns = ["id"],
             childColumns = ["recipe_id"]
+        ),
+        ForeignKey(
+            entity = Product::class,
+            parentColumns = ["id"],
+            childColumns = ["product_id"]
         )
     ],
     indices = [
@@ -228,7 +230,8 @@ data class ProductInCart(
 data class ScheduleOfRecipe(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     @ColumnInfo(name = "user_id") val userId: Int,
-    @ColumnInfo(name = "recipe_id") val recipeId: Int,
+    @ColumnInfo(name = "recipe_id") val recipeId: Int = 0,
+    @ColumnInfo(name = "product_id") val productId: Int = 0,
     val date: Date
 )
 

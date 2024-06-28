@@ -2,18 +2,12 @@ package com.example.diet_application.ui.home
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.diet_application.MainActivity
-import com.example.diet_application.Recipe
 import com.example.diet_application.databinding.ShowRecipeBinding
-import com.example.diet_application.ui.products.ProductsViewModel
-import com.example.diet_application.ui.sign_in.SignInViewModel
 
 class ShowRecipe : AppCompatActivity(), GetTitleProductInterface {
     private lateinit var binding: ShowRecipeBinding
@@ -62,8 +56,6 @@ class ShowRecipe : AppCompatActivity(), GetTitleProductInterface {
     }
 
     override fun getTitleProduct(id: Int): String {
-        var title = ""
-        title = viewModel.getProductTitleById(id)
-        return title
+        return viewModel.getProductTitleById(id)
     }
 }

@@ -31,19 +31,139 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="right|center"
-                android:textColor="@color/black"
+                android:textColor="@color/green_dark"
                 android:textStyle="bold"
+                android:textSize="@dimen/titles"
                 tools:text="ТЕКСТ" />
 
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="15dp"
+            android:textSize="25sp"
+            android:textColor="@color/green_dark"
+            android:textStyle="bold"
+            android:text="Ваши расчеты" />
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_margin="5dp"
-            android:background="@drawable/rounded_corners_sign_in" >
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:background="@drawable/rounded_corners_items_profile" >
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingRight="15dp"
+                android:paddingLeft="15dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/calories_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/titles"
+                    android:textColor="@color/green"
+                    android:textStyle="bold"
+                    android:text="Калории (ккал)" />
+
+                <TextView
+                    android:id="@+id/calories_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:gravity="right"
+                    android:textColor="@color/green"
+                    android:textStyle="bold"
+                    android:text="ЧИСЛО" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingRight="15dp"
+                android:paddingLeft="15dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/proteins_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/titles"
+                    android:textColor="@color/green"
+                    android:textStyle="bold"
+                    android:text="Белки (г)" />
+
+                <TextView
+                    android:id="@+id/proteins_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:gravity="right"
+                    android:textColor="@color/green"
+                    android:textStyle="bold"
+                    android:text="ЧИСЛО" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingRight="15dp"
+                android:paddingLeft="15dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/lipids_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/titles"
+                    android:textColor="@color/green"
+                    android:textStyle="bold"
+                    android:text="Жиры (г)" />
+
+                <TextView
+                    android:id="@+id/lipids_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:gravity="right"
+                    android:textColor="@color/green"
+                    android:textStyle="bold"
+                    android:text="ЧИСЛО" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingRight="15dp"
+                android:paddingLeft="15dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/carbohydrates_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/titles"
+                    android:textColor="@color/green"
+                    android:textStyle="bold"
+                    android:text="Углеводы (г)" />
+
+                <TextView
+                    android:id="@+id/carbohydrates_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:gravity="right"
+                    android:textColor="@color/green"
+                    android:textStyle="bold"
+                    android:text="ЧИСЛО" />
+            </LinearLayout>
         </LinearLayout>
 
     </LinearLayout>

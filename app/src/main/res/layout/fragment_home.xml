@@ -51,13 +51,30 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/list_of_recipes"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/general_margin"
             android:layout_marginTop="15dp"
             android:layout_marginEnd="@dimen/general_margin"
             tools:listitem="@layout/recipe_item" />
 
+
         </ScrollView>
+
     </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/button_show_exercises"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:icon="@drawable/sports_gymnastics_24dp_fill0_wght400_grad0_opsz24"
+        app:backgroundTint="@color/green"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="УПРАЖНЕНИЯ"
+        app:iconTint="@color/green_dark"
+        app:iconSize="35dp"
+        android:textColor="@color/green_dark"
+        android:textStyle="bold" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

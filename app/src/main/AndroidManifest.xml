@@ -26,6 +26,7 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".ui.products.CRUDActivity" />
         <activity android:name=".ui.home.ShowRecipe" />
+        <activity android:name=".ui.home.ShowExercises" />
     </application>
 
 </manifest>

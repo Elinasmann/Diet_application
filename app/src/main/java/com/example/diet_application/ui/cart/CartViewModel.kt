@@ -3,13 +3,10 @@ package com.example.diet_application.ui.cart
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.diet_application.MainDatabase
-import com.example.diet_application.Product
-import com.example.diet_application.ProductInCart
-import com.example.diet_application.Recipe
+import com.example.diet_application.db.MainDatabase
+import com.example.diet_application.db.Product
+import com.example.diet_application.db.ProductInCart
 import com.example.diet_application.Repository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

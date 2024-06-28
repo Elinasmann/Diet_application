@@ -8,14 +8,17 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.diet_application.CurrentUser
 import com.example.diet_application.MainActivity
 import com.example.diet_application.databinding.FragmentProfileBinding
 import com.example.diet_application.ui.products.CRUDActivity
 import com.example.diet_application.ui.sign_in.SignInActivity
+import kotlin.math.round
 
 class ProfileFragment : Fragment() {
 
     private var _binding: FragmentProfileBinding? = null
+
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -32,7 +35,15 @@ class ProfileFragment : Fragment() {
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val login = arguments?.getString("login")
+        profileViewModel.getUserLoginById(CurrentUser.getId()).observe(viewLifecycleOwner) {
+            binding.userLogin.text = "@$it"
+        }
+        profileViewModel.getUserResultsById(CurrentUser.getId()).observe(viewLifecycleOwner) {
+            binding.caloriesNumber.text = round(it.calories).toString()
+            binding.proteinsNumber.text = round(it.proteins).toString()
+            binding.lipidsNumber.text = round(it.lipids).toString()
+            binding.carbohydratesNumber.text = round(it.carbohydrates).toString()
+        }
 
         binding.backBtn.setOnClickListener {
             val intent = Intent (activity, SignInActivity::class.java)

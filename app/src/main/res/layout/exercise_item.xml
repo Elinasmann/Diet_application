@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="15dp"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="3dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_corners_sign_in" >
+
+        <TextView
+            android:id="@+id/exercise_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginStart="10dp"
+            android:layout_toStartOf="@id/minutes"
+            android:text="@string/product_name"
+            android:textColor="@color/green"
+            android:textSize="@dimen/titles"
+            android:textStyle="bold"
+            tools:ignore="RtlSymmetry" />
+
+        <TextView
+            android:id="@+id/minutes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toStartOf="@id/min"
+            android:layout_marginTop="10dp"
+            android:paddingEnd="5dp"
+            android:text="число"
+            android:textColor="@color/green_dark"
+            android:textSize="@dimen/titles" />
+
+        <TextView
+            android:id="@+id/min"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="10dp"
+            android:paddingEnd="10dp"
+            android:text="мин."
+            android:textColor="@color/green"
+            android:textSize="@dimen/titles"
+            android:textStyle="bold"
+            tools:ignore="RtlSymmetry" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/rounded_corners"
+            android:layout_below="@id/exercise_title"
+            android:layout_margin="10dp"
+            android:padding="5dp">
+
+            <TextView
+                android:id="@+id/exercise_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:gravity="start|top"
+                android:inputType="textMultiLine"
+                android:singleLine="false"
+                android:text="Описание"
+                android:textColor="@color/grey_hint"
+                android:textSize="@dimen/text_size_for_edit_text" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

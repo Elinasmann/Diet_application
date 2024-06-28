@@ -7,15 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.diet_application.Product
-import com.example.diet_application.StockProduct
+import com.example.diet_application.db.StockProduct
 import com.example.diet_application.databinding.FragmentProductsBinding
-import com.example.diet_application.ui.cart.CartFragment
-import com.example.diet_application.ui.cart.CartViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class ProductsFragment : Fragment(), ProductClickInterface, ProductClickDeleteInterface {

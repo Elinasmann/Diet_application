@@ -5,20 +5,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.diet_application.Recipe
-import com.example.diet_application.StockProduct
+import com.example.diet_application.CurrentUser
+import com.example.diet_application.db.Recipe
 import com.example.diet_application.databinding.FragmentHomeBinding
-import com.example.diet_application.databinding.FragmentProductsBinding
 import com.example.diet_application.ui.products.CRUDActivity
-import com.example.diet_application.ui.products.ProductAdapter
-import com.example.diet_application.ui.products.ProductClickInterface
-import com.example.diet_application.ui.products.ProductsViewModel
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class HomeFragment : Fragment(), RecipeClickInterface {
 
@@ -63,6 +57,11 @@ class HomeFragment : Fragment(), RecipeClickInterface {
                 //  updating  list.
                 itemRVAdapter.updateList(it)
             }
+        }
+
+        binding.buttonShowExercises.setOnClickListener {
+            val intent = Intent (activity, ShowExercises::class.java)
+            activity?.startActivity(intent)
         }
 
         return root

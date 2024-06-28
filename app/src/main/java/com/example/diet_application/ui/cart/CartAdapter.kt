@@ -4,16 +4,11 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.diet_application.R
-import com.example.diet_application.Product
-import com.example.diet_application.ProductInCart
-import com.example.diet_application.Recipe
-import com.example.diet_application.ui.cart.CartAdapter
-import com.example.diet_application.ui.cart.CartClickInterface
+import com.example.diet_application.db.Product
+import com.example.diet_application.db.ProductInCart
 
 
 class CartAdapter (
