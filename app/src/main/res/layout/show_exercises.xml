@@ -5,22 +5,89 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="15dp">
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:layout_marginBottom="15dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:text="@string/exercises_hint"
+                android:textColor="@color/green_dark"
+                android:textSize="@dimen/titles"
+                android:textStyle="bold" />
+            <ImageView
+                android:id="@+id/visibility"
+                android:layout_width="30dp"
+                android:rotation="-90"
+                android:layout_height="30dp"
+                android:background="@drawable/ic_left_arrow" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/hint_for_exercises"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:text="@string/exercises_hint1"
+                android:textColor="@color/green_dark" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:text="@string/exercises_hint2"
+                android:textColor="@color/green_dark" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:text="@string/exercises_hint3"
+                android:textColor="@color/green_dark" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:text="@string/exercises_hint4"
+                android:textColor="@color/green_dark" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:text="@string/exercises_hint5"
+                android:textColor="@color/green_dark"
+                android:textStyle="bold" />
+        </LinearLayout>
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/list_of_exercises"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/general_margin"
+            android:layout_marginStart="5dp"
             android:layout_marginTop="15dp"
             android:layout_marginEnd="@dimen/general_margin"
             tools:listitem="@layout/exercise_item" />
+    </LinearLayout>
 
-
-    </ScrollView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/button_back"

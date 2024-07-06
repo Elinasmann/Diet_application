@@ -58,7 +58,7 @@
                     android:layout_marginTop="@dimen/margin_top"
                     android:padding="4dp"
                     android:text="Б:"
-                    android:textColor="@color/white"
+                    android:textColor="@color/green"
                     android:textSize="@dimen/BDU"
                     android:textStyle="bold" />
 
@@ -83,7 +83,7 @@
                     android:layout_toEndOf="@id/proteins_number"
                     android:padding="4dp"
                     android:text="г.    Ж:"
-                    android:textColor="@color/white"
+                    android:textColor="@color/green"
                     android:textSize="@dimen/BDU"
                     android:textStyle="bold" />
 
@@ -108,7 +108,7 @@
                     android:layout_toEndOf="@id/lipids_number"
                     android:padding="4dp"
                     android:text="г.    У:"
-                    android:textColor="@color/white"
+                    android:textColor="@color/green"
                     android:textSize="@dimen/BDU"
                     android:textStyle="bold" />
 
@@ -132,7 +132,7 @@
                     android:layout_toEndOf="@id/carbohydrates_number"
                     android:padding="4dp"
                     android:text="г."
-                    android:textColor="@color/white"
+                    android:textColor="@color/green"
                     android:textSize="@dimen/BDU"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -156,27 +156,30 @@
                 tools:listitem="@layout/ingredients_of_recipe"/>
         </LinearLayout>
 
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="5dp"
-            android:padding="@dimen/general_margin"
-            android:background="@drawable/rounded_corners_sign_in"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/recipe_description"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:background="@android:color/transparent"
                 android:layout_height="wrap_content"
-                android:gravity="start|top"
-                android:hint="@string/product_name"
-                android:inputType="textMultiLine"
-                android:singleLine="false"
-                android:textColor="@color/black"
-                android:textSize="@dimen/text_size_for_edit_text" />
-        </LinearLayout>
+                android:layout_margin="5dp"
+                android:padding="@dimen/general_margin"
+                android:background="@drawable/rounded_corners_sign_in"
+                android:orientation="vertical">
 
+                <TextView
+                    android:id="@+id/recipe_description"
+                    android:layout_width="match_parent"
+                    android:background="@android:color/transparent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start|top"
+                    android:inputType="textMultiLine"
+                    android:singleLine="false"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_for_edit_text" />
+            </LinearLayout>
+        </ScrollView>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

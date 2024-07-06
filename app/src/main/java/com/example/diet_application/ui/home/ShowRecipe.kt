@@ -27,14 +27,14 @@ class ShowRecipe : AppCompatActivity(), GetTitleProductInterface {
         // getting data passed via an intent
         val id = intent.getIntExtra("itemId", 0)
 
-        viewModel.getRecipeById(id).observe(this) {
-            //   setting data to edit text.
-            binding.showRecipeTitle.text = it.title
-            binding.recipeDescription.text = it.description
-            binding.showProteinsNumber.text = it.proteins.toString()
-            binding.showLipidsNumber.text = it.lipids.toString()
-            binding.showCarbohydratesNumber.text = it.carbohydrates.toString()
-        }
+        var recipe = viewModel.getRecipeById(id)
+        //   setting data to edit text.
+        binding.showRecipeTitle.text = recipe?.title
+        binding.recipeDescription.text = recipe?.description
+        binding.showProteinsNumber.text = recipe?.proteins.toString()
+        binding.showLipidsNumber.text = recipe?.lipids.toString()
+        binding.showCarbohydratesNumber.text = recipe?.carbohydrates.toString()
+
 
         val ingredients: RecyclerView.LayoutManager = LinearLayoutManager(this)
         binding.ingredientsOfRecipe.setLayoutManager(ingredients)

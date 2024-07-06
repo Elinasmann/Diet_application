@@ -5,9 +5,11 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.example.diet_application.CurrentUser
 import com.example.diet_application.MainActivity
 import com.example.diet_application.db.StockProduct
 import com.example.diet_application.databinding.CrudProductsBinding
+import com.example.diet_application.db.Product
 
 class CRUDActivity : AppCompatActivity() {
     private lateinit var binding: CrudProductsBinding
@@ -50,14 +52,22 @@ class CRUDActivity : AppCompatActivity() {
             // checking the type and then saving or updating the data
             if (!(title.isNotEmpty() && reg.matches(date))) {
                 Toast.makeText(this, "Данные введены неправильно", Toast.LENGTH_LONG).show()
+            } else if (date.substring(3, 5).toInt() < 7 || date.substring(6, 10).toInt() < 2024) {
+                Toast.makeText(this, "Дата не может быть раньше текущей", Toast.LENGTH_LONG).show()
             } else {
                 if (getType.equals("Edit")) {
-                    val updatedProduct = StockProduct(productID, 0, title, description, date)
+                    val updatedProduct = StockProduct(productID, CurrentUser.getId(), title, description, date)
                     viewModel.update(updatedProduct)
                     Toast.makeText(this, "Изменения сохранены", Toast.LENGTH_LONG).show()
                 } else {
                     // if the string is not empty > calling a add method to add data to room database
-                    viewModel.add(StockProduct(0, 0, title, description, date))
+                    viewModel.add(StockProduct(0, CurrentUser.getId(), title, description, date))
+                    viewModel.getProductsByTitle(title).observe(this) {
+                        val justZero = 0
+                        if (it.isEmpty()) {
+                            viewModel.add(Product(0, title, justZero.toFloat(), justZero.toFloat(), justZero.toFloat(), justZero.toFloat(), false))
+                        }
+                    }
                     Toast.makeText(this, "$title добавлен", Toast.LENGTH_LONG).show()
                 }
 

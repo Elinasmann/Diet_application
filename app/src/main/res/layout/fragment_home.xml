@@ -34,7 +34,7 @@
                 android:textSize="@dimen/titles"
                 android:textStyle="bold"
                 android:textColor="@color/green_dark"
-                android:text="18.06.2024" />
+                android:text="ДД.ММ.ГГГГ" />
 
             <ImageView
                 android:id="@+id/next_date"

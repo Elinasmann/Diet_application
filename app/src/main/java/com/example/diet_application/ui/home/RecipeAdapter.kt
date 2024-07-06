@@ -7,11 +7,12 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.diet_application.R
+import com.example.diet_application.databinding.RecipeItemBinding
 import com.example.diet_application.db.Recipe
 
 class RecipeAdapter (
     val context: Context,
-    private val RecipeClickInterface: RecipeClickInterface
+    private val recipeClickInterface: RecipeClickInterface
 ) :
     RecyclerView.Adapter<RecipeAdapter.ViewHolder>() {
 
@@ -20,12 +21,7 @@ class RecipeAdapter (
 
     // creating a view holder class
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        // creating an initializing all variables which added in layout file
-        val recipe = itemView.findViewById<TextView>(R.id.recipe_title)
-        val calories = itemView.findViewById<TextView>(R.id.calories_number)
-        val proteins = itemView.findViewById<TextView>(R.id.proteins_number)
-        val lipids = itemView.findViewById<TextView>(R.id.lipids_number)
-        val carbohydrates = itemView.findViewById<TextView>(R.id.carbohydrates_number)
+        val binding = RecipeItemBinding.bind(itemView)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -38,16 +34,18 @@ class RecipeAdapter (
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        //   setting data to item of recycler view
-        holder.recipe.text = allRecipes[position].title
-        holder.calories.text = allRecipes[position].calories.toString()
-        holder.proteins.text = allRecipes[position].proteins.toString()
-        holder.lipids.text = allRecipes[position].lipids.toString()
-        holder.carbohydrates.text = allRecipes[position].carbohydrates.toString()
-        //   adding click listener to   recycler view item
-        holder.itemView.setOnClickListener {
-            //   calling a note click interface and  passing a position to it
-            RecipeClickInterface.onClick(allRecipes[position])
+        with(holder) {
+            //   setting data to item of recycler view
+            binding.recipeTitle.text = allRecipes[position].title
+            binding.caloriesNumber.text = allRecipes[position].calories.toString()
+            binding.proteinsNumber.text = allRecipes[position].proteins.toString()
+            binding.lipidsNumber.text = allRecipes[position].lipids.toString()
+            binding.carbohydratesNumber.text = allRecipes[position].carbohydrates.toString()
+            //   adding click listener to   recycler view item
+            holder.itemView.setOnClickListener {
+                //   calling a note click interface and  passing a position to it
+                recipeClickInterface.onClick(allRecipes[position])
+            }
         }
     }
 
@@ -57,14 +55,15 @@ class RecipeAdapter (
     }
 
     // use to update   list
-    fun updateList(newList: List<Recipe>) {
+    fun update(item: Recipe) {
         //   clearing array list
-        allRecipes.clear()
-        val temp = newList.subList(6, 8)
         //   adding a new list to   all list
-        allRecipes.addAll(temp)
+        allRecipes.add(item)
         //   calling notify data change method to notify   adapter
         notifyDataSetChanged()
+    }
+    fun clearList() {
+        allRecipes.clear()
     }
 }
 

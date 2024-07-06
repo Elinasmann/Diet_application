@@ -4,15 +4,22 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.diet_application.CurrentUser
-import com.example.diet_application.db.Recipe
 import com.example.diet_application.databinding.FragmentHomeBinding
-import com.example.diet_application.ui.products.CRUDActivity
+import com.example.diet_application.db.Recipe
+import java.text.SimpleDateFormat
+import java.time.Instant
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.util.Calendar
+import java.util.Date
+import java.util.Locale
 
 class HomeFragment : Fragment(), RecipeClickInterface {
 
@@ -21,47 +28,88 @@ class HomeFragment : Fragment(), RecipeClickInterface {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
-    lateinit var viewModel : HomeViewModel
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        viewModel = ViewModelProvider(
-            this,
-            ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application)
-        ).get(HomeViewModel::class.java)
+        val viewModel =
+            ViewModelProvider(this).get(HomeViewModel::class.java)
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        //  initializing
-        // all  variables.
-        var itemsRV: RecyclerView = binding.listOfRecipes
+        val recipeItems: RecyclerView = binding.listOfRecipes
+        recipeItems.layoutManager = LinearLayoutManager(requireContext())
+        val recipeItemsAdapter = RecipeAdapter(requireContext(),this)
+        recipeItems.adapter = recipeItemsAdapter
 
-        //  setting layout
-        // manager to  recycler view.
-        itemsRV.layoutManager = LinearLayoutManager(requireContext())
 
-        //  initializing  adapter class.
-        val itemRVAdapter = RecipeAdapter(requireContext(),this)
+        val calendar: Calendar = Calendar.getInstance()
+        val formatter = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+        val year = calendar.get(Calendar.YEAR)
+        val month = calendar.get(Calendar.MONTH)
+        val day = calendar.get(Calendar.DAY_OF_MONTH)
 
-        //  setting
-        // adapter to  recycler view.
-        itemsRV.adapter = itemRVAdapter
+        binding.showDate.text = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(calendar.time)
 
-        //  calling all items method
-        // from  view modal class to observer the changes on list.
-        viewModel.allRecipes.observe(viewLifecycleOwner) { list ->
-            list?.let {
-                //  updating  list.
-                itemRVAdapter.updateList(it)
+        viewModel.getRecipeScheduleByUserId(CurrentUser.getId(), Date(year-1900, month, day)).observe(viewLifecycleOwner) {
+            for (item in it) {
+                item.recipeId?.let { it1 ->
+                    viewModel.getRecipeByIdNormal(it1).observe(viewLifecycleOwner) { recipe ->
+                        recipeItemsAdapter.update(recipe)
+                    }
+                }
             }
         }
 
-        binding.buttonShowExercises.setOnClickListener {
-            val intent = Intent (activity, ShowExercises::class.java)
-            activity?.startActivity(intent)
+
+        binding.nextDate.setOnClickListener {
+            calendar.setTime(formatter.parse(binding.showDate.text.toString()))
+            calendar.add(Calendar.DATE, 1)
+            viewModel.getRecipeScheduleByUserId(CurrentUser.getId(), calendar.time).observe(viewLifecycleOwner) {
+                if (it.isNotEmpty()) {
+                    binding.showDate.text = formatter.format(calendar.time)
+                    recipeItemsAdapter.clearList()
+                    for (item in it) {
+                        item.recipeId?.let { it1 ->
+                            viewModel.getRecipeByIdNormal(it1)
+                                .observe(viewLifecycleOwner) { recipe ->
+                                    recipeItemsAdapter.update(recipe)
+                                }
+                        }
+                    }
+                }
+            }
+        }
+        binding.previousDate.setOnClickListener {
+            calendar.setTime(formatter.parse(binding.showDate.text.toString()))
+            calendar.add(Calendar.DATE, -1)
+            viewModel.getRecipeScheduleByUserId(CurrentUser.getId(), calendar.time).observe(viewLifecycleOwner) {
+                if (it.isNotEmpty()) {
+                    binding.showDate.text = formatter.format(calendar.time)
+                    recipeItemsAdapter.clearList()
+                    for (item in it) {
+                        item.recipeId?.let { it1 ->
+                            viewModel.getRecipeByIdNormal(it1)
+                                .observe(viewLifecycleOwner) { recipe ->
+                                    recipeItemsAdapter.update(recipe)
+                                }
+                        }
+                    }
+                }
+            }
+        }
+
+        if (viewModel.isUserNeedExercises(CurrentUser.getId())) {
+            binding.buttonShowExercises.setOnClickListener {
+                val intent = Intent(activity, ShowExercises::class.java)
+                intent.putExtra("date", binding.showDate.text.toString())
+                activity?.startActivity(intent)
+            }
+        } else {
+            binding.buttonShowExercises.visibility = GONE
         }
 
         return root

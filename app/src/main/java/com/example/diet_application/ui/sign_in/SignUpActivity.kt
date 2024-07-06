@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -133,6 +134,14 @@ class SignUpActivity : AppCompatActivity() {
                     }
                 }
             }
+
+        binding.visibility.setOnClickListener {
+            if (binding.kfaHint.visibility == View.GONE) {
+                binding.kfaHint.visibility = View.VISIBLE
+            } else {
+                binding.kfaHint.visibility = View.GONE
+            }
+        }
 
         binding.backBtn.setOnClickListener {
             val showContent = Intent(this, SignInActivity::class.java)

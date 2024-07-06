@@ -5,11 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
-    android:paddingHorizontal="16dp"
-    tools:context=".MainActivity">
+    android:paddingHorizontal="8dp"
+    tools:context=".ui.cart.CartFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvList"
+        android:id="@+id/list_of_products"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="8dp"

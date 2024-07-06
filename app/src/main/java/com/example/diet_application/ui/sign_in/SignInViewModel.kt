@@ -10,6 +10,7 @@ import com.example.diet_application.db.User
 import com.example.diet_application.db.UserResults
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 class SignInViewModel (application: Application) : AndroidViewModel(application) {
 
@@ -27,15 +28,12 @@ class SignInViewModel (application: Application) : AndroidViewModel(application)
         repository.insert(item)
     }
 
-
     fun checkIfUserIsRegistered(login: String, password: String): LiveData<List<User>> {
         return repository.checkIfUserIsRegistered(login, password)
     }
-
     fun checkLoginExists(login: String): LiveData<List<User>> {
         return repository.checkLoginExists(login)
     }
-
     fun getUserResultsById(id: Int): LiveData<UserResults> {
         return repository.getUserResultsById(id)
     }

@@ -27,6 +27,7 @@
         <activity android:name=".ui.products.CRUDActivity" />
         <activity android:name=".ui.home.ShowRecipe" />
         <activity android:name=".ui.home.ShowExercises" />
+        <activity android:name=".ui.profile.UpdateParams" />
     </application>
 
 </manifest>

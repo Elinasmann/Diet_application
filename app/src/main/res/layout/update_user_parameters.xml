@@ -7,132 +7,45 @@
     tools:context=".ui.sign_in.SignUpActivity">
 
     <LinearLayout
-        android:id="@+id/createAccountLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:orientation="horizontal"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:id="@+id/backBtn"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_gravity="center"
-            android:background="@drawable/ic_left_arrow" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:text="@string/title_sign_up"
-            android:textColor="@color/green_dark"
-            android:textSize="28sp"
-            android:textStyle="bold" />
-
-    </LinearLayout>
-
-    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="70dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/createAccountLayout">
+        android:orientation="vertical">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:id="@+id/createAccountLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
+            android:layout_margin="16dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/backBtn"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_gravity="center"
+                android:background="@drawable/ic_left_arrow" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="16dp"
+                android:gravity="center"
+                android:text="@string/update"
+                android:textColor="@color/green_dark"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
+            android:padding="15dp"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/Sign_up"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="@string/title_login_password"
-                android:textSize="@dimen/button_text_size"
-                android:textStyle="bold" />
-
             <LinearLayout
-                android:layout_width="320dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_top"
-                android:background="@drawable/rounded_corners"
-                android:gravity="center">
-
-                <EditText
-                    android:id="@+id/login"
-                    android:layout_width="300dp"
-                    android:layout_height="wrap_content"
-                    android:height="50dp"
-                    android:background="@android:color/transparent"
-                    android:backgroundTint="@null"
-                    android:hint="@string/login"
-                    android:maxLines="1"
-                    android:textSize="@dimen/text_size_for_edit_text" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="320dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_top"
-                android:background="@drawable/rounded_corners"
-                android:gravity="center">
-
-                <EditText
-                    android:id="@+id/password"
-                    android:layout_width="300dp"
-                    android:layout_height="50dp"
-                    android:background="@android:color/transparent"
-                    android:hint="@string/password"
-                    android:inputType="textPassword"
-                    android:maxLines="1"
-                    android:textSize="@dimen/text_size_for_edit_text" />
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/Form"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="35dp"
-                android:text="@string/title_form"
-                android:textSize="@dimen/button_text_size"
-                android:textStyle="bold" />
-
-            <RadioGroup
-                android:id="@+id/radio"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="@dimen/margin_top"
-                android:orientation="horizontal">
-
-                <RadioButton
-                    android:id="@+id/Male"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:checked="true"
-                    android:text="@string/gender_men"
-                    android:textSize="@dimen/text_size_for_edit_text" />
-
-                <RadioButton
-                    android:id="@+id/Female"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:checked="false"
-                    android:text="@string/gender_fem"
-                    android:textSize="@dimen/text_size_for_edit_text" />
-            </RadioGroup>
-
-            <LinearLayout
-                android:layout_width="320dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_top"
                 android:background="@drawable/rounded_corners"
@@ -140,8 +53,10 @@
 
                 <EditText
                     android:id="@+id/age"
-                    android:layout_width="300dp"
+                    android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
                     android:background="@android:color/transparent"
                     android:hint="@string/age"
                     android:inputType="number"
@@ -150,7 +65,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="320dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_top"
                 android:background="@drawable/rounded_corners"
@@ -158,8 +73,10 @@
 
                 <EditText
                     android:id="@+id/weight"
-                    android:layout_width="300dp"
+                    android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
                     android:background="@android:color/transparent"
                     android:hint="@string/weight"
                     android:maxLines="1"
@@ -167,7 +84,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="320dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_top"
                 android:background="@drawable/rounded_corners"
@@ -175,8 +92,10 @@
 
                 <EditText
                     android:id="@+id/height"
-                    android:layout_width="300dp"
+                    android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
                     android:background="@android:color/transparent"
                     android:hint="@string/height"
                     android:maxLines="1"
@@ -184,7 +103,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="320dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_top"
                 android:background="@drawable/rounded_corners"
@@ -192,8 +111,10 @@
 
                 <EditText
                     android:id="@+id/physicalActivityRatio"
-                    android:layout_width="300dp"
+                    android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
                     android:background="@android:color/transparent"
                     android:hint="@string/physicalActivityRatio"
                     android:maxLines="1"
@@ -211,36 +132,42 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/kfa_hint" />
+
                 <ImageView
                     android:id="@+id/visibility"
                     android:layout_width="25dp"
-                    android:rotation="-90"
                     android:layout_height="25dp"
-                    android:background="@drawable/ic_left_arrow" />
+                    android:background="@drawable/ic_left_arrow"
+                    android:rotation="-90" />
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/kfa_hint"
-                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/kfa_hint1" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/kfa_hint2" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/kfa_hint3" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/kfa_hint4" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -258,16 +185,15 @@
                 android:textSize="@dimen/text_size_for_edit_text" />
 
             <Button
-                android:id="@+id/button_create"
-                android:layout_width="320dp"
+                android:id="@+id/button_update"
+                android:layout_width="match_parent"
                 android:layout_height="60sp"
                 android:layout_marginTop="@dimen/margin_top"
                 android:backgroundTint="@color/green"
-                android:text="@string/button_create"
+                android:text="@string/save"
                 android:textSize="@dimen/button_text_size"
                 android:textStyle="bold" />
-
         </LinearLayout>
-    </ScrollView>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

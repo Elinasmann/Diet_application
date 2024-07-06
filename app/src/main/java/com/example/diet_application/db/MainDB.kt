@@ -51,12 +51,12 @@ abstract class MainDatabase : RoomDatabase() {
 class Converters {
     @TypeConverter
     fun fromTimestamp(value: Long): Date {
-        return value.let { Date(it) }
+        return Date(value)
     }
 
     @TypeConverter
     fun dateToTimestamp(date: Date): Long {
-        return date.time.toLong()
+        return date.time
     }
 }
 
@@ -230,14 +230,17 @@ data class ProductInCart(
 data class ScheduleOfRecipe(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     @ColumnInfo(name = "user_id") val userId: Int,
-    @ColumnInfo(name = "recipe_id") val recipeId: Int = 0,
-    @ColumnInfo(name = "product_id") val productId: Int = 0,
+    @ColumnInfo(name = "recipe_id") val recipeId: Int?,
+    @ColumnInfo(name = "product_id") val productId: Int?,
     val date: Date
 )
 
 
 @Entity(
-    tableName = "exercises"
+    tableName = "exercises",
+    indices = [
+        Index("type")
+    ]
 )
 data class Exercise(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,

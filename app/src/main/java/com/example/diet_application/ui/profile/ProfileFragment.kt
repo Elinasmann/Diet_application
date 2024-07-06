@@ -45,11 +45,18 @@ class ProfileFragment : Fragment() {
             binding.carbohydratesNumber.text = round(it.carbohydrates).toString()
         }
 
+
         binding.backBtn.setOnClickListener {
             val intent = Intent (activity, SignInActivity::class.java)
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            activity?.startActivity(intent)
+            activity?.finish()
+        }
+        binding.updateParametrs.setOnClickListener {
+            val intent = Intent (activity, UpdateParams::class.java)
             activity?.startActivity(intent)
         }
-
 
         return root
     }

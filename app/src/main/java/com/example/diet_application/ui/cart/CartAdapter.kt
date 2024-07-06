@@ -7,23 +7,22 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.diet_application.R
+import com.example.diet_application.databinding.CartItemBinding
+import com.example.diet_application.databinding.RecipeItemBinding
 import com.example.diet_application.db.Product
 import com.example.diet_application.db.ProductInCart
 
 
 class CartAdapter (
     val context: Context,
-    private val CartClickInterface: CartClickInterface
+    private val cartInterface: CartInterface
 ) : RecyclerView.Adapter<CartAdapter.ViewHolder>() {
 
     // creating a variable for all Recipe list
     private val allProductsInCart = ArrayList<ProductInCart>()
-    private val allProducts = ArrayList<Product>()
     // creating a view holder class
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        // creating an initializing all variables which added in layout file
-        val product_title = itemView.findViewById<TextView>(R.id.product_title_in_cart)
-        val check = itemView.findViewById<TextView>(R.id.check_cart)
+        val binding = CartItemBinding.bind(itemView)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -36,12 +35,18 @@ class CartAdapter (
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        //   setting data to item of recycler view
-        holder.product_title.text = allProducts[position].title
-        //   adding click listener to   recycler view item
-        holder.check.setOnClickListener {
-            //   calling a note click interface and  passing a position to it
-            CartClickInterface.onClick(allProductsInCart[position])
+        with(holder) {
+            //   setting data to item of recycler view
+            binding.productTitleInCart.text = cartInterface.getProductTitle(allProductsInCart[position])
+            binding.checkBuy.setChecked(allProductsInCart[position].checkBuy)
+            binding.checkBuy.setOnCheckedChangeListener { _, isChecked ->
+                //   calling a note click interface and  passing a position to it
+                if (isChecked) {
+                    cartInterface.onClickSet(allProductsInCart[position])
+                } else {
+                    cartInterface.onClickRemove(allProductsInCart[position])
+                }
+            }
         }
     }
 
@@ -52,7 +57,6 @@ class CartAdapter (
 
     // use to update   list
     fun updateList(newList: List<ProductInCart>) {
-        //   clearing array list
         allProductsInCart.clear()
         //   adding a new list to   all list
         allProductsInCart.addAll(newList)
@@ -60,7 +64,9 @@ class CartAdapter (
         notifyDataSetChanged()
     }
 }
-interface CartClickInterface {
+interface CartInterface {
     // creating a method for click action on recycler view item for updating it
-    fun onClick(item: ProductInCart)
+    fun onClickSet(item: ProductInCart)
+    fun onClickRemove(item: ProductInCart)
+    fun getProductTitle(item: ProductInCart): String
 }

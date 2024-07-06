@@ -34,4 +34,20 @@
     <string name="save">СОХРАНИТЬ</string>
 
     <string name="expiration_date_hint">Годен до: </string>
+
+    <string name="exercises_hint">Общие сведения тренировки:</string>
+    <string name="exercises_hint1">1. Выполните суставную разминку перед выполнением блока упражнений.</string>
+    <string name="exercises_hint2">2. Упражнения -Растяжки- выполняются в два круга без отдыха.</string>
+    <string name="exercises_hint3">3. Упражнения -Кардио- выполняются в три круга: отдых между упражнениями 15 секунд, отдых между кругами 2 минуты.</string>
+    <string name="exercises_hint4">4. Упражнения -Силовые- выполняются в четыре круга: отдых между упражнениями 30 секунд, отдых между кругами 1 минута.</string>
+    <string name="exercises_hint5">5. Упражнения -Ходьба- и -Бег- выполняются вне круговых повторений. Является желательным выполнение этих упражнений больше указанного времени.</string>
+
+    <string name="kfa_hint">Сведения о КФА:</string>
+    <string name="kfa_hint1">Тренировок нет ---- <b>1.2</b></string>
+    <string name="kfa_hint2">Легкие (занятия физической работой 1-3 раза в неделю) ---- <b>1.375</b></string>
+    <string name="kfa_hint3">Умеренные (3-5 раз в неделю) ---- <b>1.55</b></string>
+    <string name="kfa_hint4">Тяжелые (6-7 дней в неделю) ---- <b>1.725</b></string>
+    <string name="kfa_hint5">Очень тяжелые (несколько раз в день, 6-7 дней в неделю) ---- <b>1.9</b></string>
+
+    <string name="update">Редактирование параметров</string>
 </resources>

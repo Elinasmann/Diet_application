@@ -7,19 +7,23 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.diet_application.R
+import com.example.diet_application.databinding.ExerciseItemBinding
+import com.example.diet_application.databinding.RecipeItemBinding
 import com.example.diet_application.db.Exercise
+import com.example.diet_application.db.ScheduleOfExercise
+import java.util.Date
 
-class ExerciseAdapter (val context: Context) :
-    RecyclerView.Adapter<ExerciseAdapter.ViewHolder>() {
+class ExerciseAdapter (
+    val context: Context,
+    private val getMinutesInterface: GetMitutesInterface
+) : RecyclerView.Adapter<ExerciseAdapter.ViewHolder>() {
 
     // creating a variable for all Exercise list
     private val allExercises = ArrayList<Exercise>()
 
     // creating a view holder class
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        // creating an initializing all variables which added in layout file
-        val exercise = itemView.findViewById<TextView>(R.id.exercise_title)
-        val description = itemView.findViewById<TextView>(R.id.exercise_description)
+        val binding = ExerciseItemBinding.bind(itemView)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -32,9 +36,12 @@ class ExerciseAdapter (val context: Context) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        //   setting data to item of recycler view
-        holder.exercise.text = allExercises[position].title
-        holder.description.text = allExercises[position].description
+        with(holder) {
+            binding.exerciseTitle.text = allExercises[position].title
+            binding.minutes.text = getMinutesInterface.getMinutes(allExercises[position]).toString()
+            binding.type.text = allExercises[position].type
+            binding.exerciseDescription.text = allExercises[position].description
+        }
     }
 
     override fun getItemCount(): Int {
@@ -43,13 +50,14 @@ class ExerciseAdapter (val context: Context) :
     }
 
     // use to update   list
-    fun updateList(newList: List<Exercise>) {
+    fun updateList(item: Exercise) {
         //   clearing array list
-        allExercises.clear()
-        val temp = newList.subList(10, 14)
-        //   adding a new list to   all list
-        allExercises.addAll(temp)
+        allExercises.add(item)
         //   calling notify data change method to notify   adapter
         notifyDataSetChanged()
     }
+}
+
+interface GetMitutesInterface {
+    fun getMinutes(item: Exercise): Float?
 }

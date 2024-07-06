@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.diet_application.CurrentUser
 import com.example.diet_application.db.StockProduct
 import com.example.diet_application.databinding.FragmentProductsBinding
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -37,29 +38,27 @@ class ProductsFragment : Fragment(), ProductClickInterface, ProductClickDeleteIn
 
         //  initializing
         // all  variables.
-        var itemsRV: RecyclerView = binding.listOfProducts
-        var addFAB: FloatingActionButton = binding.buttonCreate
+        var items: RecyclerView = binding.listOfProducts
+        var addItem: FloatingActionButton = binding.buttonCreate
 
         //  setting layout
         // manager to  recycler view.
-        itemsRV.layoutManager = LinearLayoutManager(requireContext())
+        items.layoutManager = LinearLayoutManager(requireContext())
 
         //  initializing  adapter class.
-        val itemRVAdapter = ProductAdapter(requireContext(), this, this)
+        val itemsAdapter = ProductAdapter(requireContext(), this, this)
 
         //  setting
         // adapter to  recycler view.
-        itemsRV.adapter = itemRVAdapter
+        items.adapter = itemsAdapter
 
         //  calling all items method
         // from  view modal class to observer the changes on list.
-        viewModel.allProducts.observe(viewLifecycleOwner) { list ->
-            list?.let {
-                //  updating  list.
-                itemRVAdapter.updateList(it)
-            }
+        viewModel.getAllStockProducts(CurrentUser.getId()).observe(viewLifecycleOwner) { 
+            itemsAdapter.updateList(it)
         }
-        addFAB.setOnClickListener {
+        
+        addItem.setOnClickListener {
             // adding a click listener for fab button
             // and opening a new intent to add a new item.
             val intent = Intent (activity, CRUDActivity::class.java)

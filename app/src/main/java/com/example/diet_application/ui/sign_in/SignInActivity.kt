@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.example.diet_application.CurrentUser
 import com.example.diet_application.MainActivity
 import com.example.diet_application.R
 import com.example.diet_application.databinding.ActivityMainBinding
@@ -44,8 +45,8 @@ class SignInActivity : AppCompatActivity() {
                         //fetch data and returns list of users if registered
                         //check if user already exist in database
                         if (loginDetailsList.isNotEmpty()) {
-                            viewModel.getUserResultsById(loginDetailsList[0].id).observe(this) {results ->
-                                if (results == null) {
+                            viewModel.getUserResultsById(loginDetailsList[0].id).observe(this) {
+                                if (it == null) {
                                     var mifSanGeorFormula = 9.99*loginDetailsList[0].weight + 6.25*loginDetailsList[0].height + 4.92*loginDetailsList[0].age
                                     mifSanGeorFormula = if (loginDetailsList[0].gender == "male") {
                                         mifSanGeorFormula + 5
@@ -78,8 +79,8 @@ class SignInActivity : AppCompatActivity() {
                                 "Вход выполнен успешно",
                                 Toast.LENGTH_SHORT
                             ).show()
+                            CurrentUser.setId(loginDetailsList[0].id)
                             val intent = Intent(this, MainActivity::class.java)
-                            intent.putExtra("id", loginDetailsList[0].id)
                             startActivity(intent)
                             this.finish()
                         } else {
