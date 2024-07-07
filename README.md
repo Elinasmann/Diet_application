@@ -1,2 +1,2 @@
-1. Download app.apk file
+1. Download app-debug.apk file
 2. Install it
