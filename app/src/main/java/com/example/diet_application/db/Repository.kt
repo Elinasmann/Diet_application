@@ -38,7 +38,7 @@ class Repository(private val Dao: MainDao) {
     suspend fun insert(item: User) {
         Dao.insert(item)
     }
-    fun checkLoginExists(login: String): LiveData<List<User>> {
+    suspend fun checkLoginExists(login: String): User? {
         return Dao.checkLoginExists(login)
     }
     fun checkIfUserIsRegistered(
@@ -96,6 +96,13 @@ class Repository(private val Dao: MainDao) {
     fun getRecipeScheduleByUserId(id: Int, date: Date): LiveData<List<ScheduleOfRecipe>> {
         return Dao.getRecipeScheduleByUserId(id, date)
     }
+    suspend fun checkIsRecipeScheduleExist(id: Int, date: Date): ScheduleOfRecipe? {
+        return Dao.checkIsRecipeScheduleExist(id, date)
+    }
+    suspend fun getSmallCaloriesRecipes(): List<Recipe> {
+        return Dao.getSmallCaloriesRecipes()
+    }
+
 
     fun getExerciseScheduleByUserId(id: Int, date: Date): LiveData<List<ScheduleOfExercise>> {
         return Dao.getExerciseScheduleByUserId(id, date)

@@ -65,7 +65,7 @@ class UpdateParams : AppCompatActivity() {
                 } else {
                     val heightM = binding.height.text.toString().toFloat()/100
                     val imt = binding.weight.text.toString().toFloat()/(heightM*heightM)
-                    if (imt < 16 || imt > 30) {
+                    if (imt < 16 || imt > 31) {
                         Toast.makeText(
                             this,
                             "Ваше здоровье требует медицинского вмешательства. Возвращайтесь к нам позже",

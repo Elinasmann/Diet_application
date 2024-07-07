@@ -47,14 +47,18 @@ class HomeFragment : Fragment(), RecipeClickInterface {
 
 
         val calendar: Calendar = Calendar.getInstance()
+        calendar.set(Calendar.HOUR_OF_DAY, 0)
+        calendar.set(Calendar.MINUTE, 0)
+        calendar.set(Calendar.SECOND, 0)
+        calendar.set(Calendar.MILLISECOND, 0)
         val formatter = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
-        val year = calendar.get(Calendar.YEAR)
-        val month = calendar.get(Calendar.MONTH)
-        val day = calendar.get(Calendar.DAY_OF_MONTH)
 
-        binding.showDate.text = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(calendar.time)
+        if (viewModel.checkIsRecipeScheduleExist(CurrentUser.getId(), calendar.time) == null) {
+            calendar.add(Calendar.DATE, 1)
+        }
+        binding.showDate.text = formatter.format(calendar.time)
 
-        viewModel.getRecipeScheduleByUserId(CurrentUser.getId(), Date(year-1900, month, day)).observe(viewLifecycleOwner) {
+        viewModel.getRecipeScheduleByUserId(CurrentUser.getId(), calendar.time).observe(viewLifecycleOwner) {
             for (item in it) {
                 item.recipeId?.let { it1 ->
                     viewModel.getRecipeByIdNormal(it1).observe(viewLifecycleOwner) { recipe ->
@@ -66,39 +70,47 @@ class HomeFragment : Fragment(), RecipeClickInterface {
 
 
         binding.nextDate.setOnClickListener {
-            calendar.setTime(formatter.parse(binding.showDate.text.toString()))
             calendar.add(Calendar.DATE, 1)
-            viewModel.getRecipeScheduleByUserId(CurrentUser.getId(), calendar.time).observe(viewLifecycleOwner) {
-                if (it.isNotEmpty()) {
-                    binding.showDate.text = formatter.format(calendar.time)
-                    recipeItemsAdapter.clearList()
-                    for (item in it) {
-                        item.recipeId?.let { it1 ->
-                            viewModel.getRecipeByIdNormal(it1)
-                                .observe(viewLifecycleOwner) { recipe ->
-                                    recipeItemsAdapter.update(recipe)
+            if (viewModel.checkIsRecipeScheduleExist(CurrentUser.getId(), calendar.time) != null) {
+                viewModel.getRecipeScheduleByUserId(CurrentUser.getId(), calendar.time)
+                    .observe(viewLifecycleOwner) {
+                        if (it.isNotEmpty()) {
+                            binding.showDate.text = formatter.format(calendar.time)
+                            recipeItemsAdapter.clearList()
+                            for (item in it) {
+                                item.recipeId?.let { it1 ->
+                                    viewModel.getRecipeByIdNormal(it1)
+                                        .observe(viewLifecycleOwner) { recipe ->
+                                            recipeItemsAdapter.update(recipe)
+                                        }
                                 }
+                            }
                         }
                     }
-                }
+            } else {
+                calendar.add(Calendar.DATE, -1)
             }
         }
         binding.previousDate.setOnClickListener {
-            calendar.setTime(formatter.parse(binding.showDate.text.toString()))
             calendar.add(Calendar.DATE, -1)
-            viewModel.getRecipeScheduleByUserId(CurrentUser.getId(), calendar.time).observe(viewLifecycleOwner) {
-                if (it.isNotEmpty()) {
-                    binding.showDate.text = formatter.format(calendar.time)
-                    recipeItemsAdapter.clearList()
-                    for (item in it) {
-                        item.recipeId?.let { it1 ->
-                            viewModel.getRecipeByIdNormal(it1)
-                                .observe(viewLifecycleOwner) { recipe ->
-                                    recipeItemsAdapter.update(recipe)
+            if (viewModel.checkIsRecipeScheduleExist(CurrentUser.getId(), calendar.time) != null) {
+                viewModel.getRecipeScheduleByUserId(CurrentUser.getId(), calendar.time)
+                    .observe(viewLifecycleOwner) {
+                        if (it.isNotEmpty()) {
+                            binding.showDate.text = formatter.format(calendar.time)
+                            recipeItemsAdapter.clearList()
+                            for (item in it) {
+                                item.recipeId?.let { it1 ->
+                                    viewModel.getRecipeByIdNormal(it1)
+                                        .observe(viewLifecycleOwner) { recipe ->
+                                            recipeItemsAdapter.update(recipe)
+                                        }
                                 }
+                            }
                         }
                     }
-                }
+            } else {
+                calendar.add(Calendar.DATE, 1)
             }
         }
 

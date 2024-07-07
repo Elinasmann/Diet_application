@@ -50,6 +50,10 @@ class MainViewModel (application: Application) : AndroidViewModel(application) {
     fun getRecipeScheduleByUserId(id: Int, date: Date): LiveData<List<ScheduleOfRecipe>> {
         return repository.getRecipeScheduleByUserId(id, date)
     }
+    fun getSmallCaloriesRecipes(): List<Recipe> = runBlocking {
+        repository.getSmallCaloriesRecipes()
+    }
+
 
     fun deleteCartByUserId(id: Int) = viewModelScope.launch(Dispatchers.IO) {
         repository.deleteCartByUserId(id)

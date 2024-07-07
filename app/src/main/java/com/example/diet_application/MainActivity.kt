@@ -2,6 +2,7 @@ package com.example.diet_application
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.ui.setupWithNavController
@@ -34,7 +35,7 @@ class MainActivity : AppCompatActivity() {
         val year = c.get(Calendar.YEAR)
         val month = c.get(Calendar.MONTH)
         val day = c.get(Calendar.DAY_OF_MONTH)
-        val currentDate = Date(year-1900, month, day)
+        val currentDate = Date(year-1900, month, day+1)
         //first - create (if not create yet) schedule of recipes
         viewModel.getRecipeScheduleByUserId(CurrentUser.getId(), currentDate).observe(this) { list ->
             c.setTime(currentDate)
@@ -42,21 +43,42 @@ class MainActivity : AppCompatActivity() {
                 val results = viewModel.getUserResultsByIdBlocking(CurrentUser.getId())
                 val dbRecipesSize = viewModel.getCountOfRecipes()
                 repeat (4) {
+                    var i = 0
                     var randomIdRecipe: Int
-                    var allCalories = 0.0F
+                    var allResults = mutableListOf(0.0F, 0.0F, 0.0F, 0.0F) //calories, proteins, lipids, carbohydrates
                     do {
                         randomIdRecipe = (1..<dbRecipesSize).random()
                         val check = viewModel.checkIsRecipeInSchedule(randomIdRecipe, CurrentUser.getId(), c.time)
                         if (check == null) {
                             val recipe = viewModel.getRecipeById(randomIdRecipe)
                             if (recipe != null) {
-                                if ((recipe.calories < results.calories / 2) && (allCalories + recipe.calories < results.calories * 1.1)) {
-                                    viewModel.add(ScheduleOfRecipe(0, CurrentUser.getId(), recipe.id, null, c.time))
-                                    allCalories += recipe.calories
+                                if (recipe.calories > 500) {
+                                    if ((allResults[0] + recipe.calories < results.calories * 1.1) && (allResults[1] + recipe.proteins < results.proteins * 1.25)
+                                        && (allResults[2] + recipe.lipids < results.lipids * 1.25) && (allResults[3] + recipe.carbohydrates < results.carbohydrates * 1.25)) {
+                                            viewModel.add(ScheduleOfRecipe(0, CurrentUser.getId(), recipe.id, null, c.time))
+                                            allResults[0] += recipe.calories
+                                            allResults[1] += recipe.proteins
+                                            allResults[2] += recipe.lipids
+                                            allResults[3] += recipe.carbohydrates
+                                    }
                                 }
+                                i += 1
                             }
                         }
-                    } while (allCalories < results.calories)
+                    } while (allResults[0] < results.calories && i < 20)
+                    if (i == 20) {
+                        val recipes = viewModel.getSmallCaloriesRecipes()
+                        do {
+                            val index = recipes.indices.random()
+                            val check = viewModel.checkIsRecipeInSchedule(recipes[index].id, CurrentUser.getId(), c.time)
+                            if (check == null) {
+                                if (allResults[0] + recipes[index].calories < results.calories * 1.1) {
+                                    viewModel.add(ScheduleOfRecipe(0, CurrentUser.getId(), recipes[index].id, null, c.time))
+                                    allResults[0] += recipes[index].calories
+                                }
+                            }
+                        } while (allResults[0] < results.calories)
+                    }
                     c.add(Calendar.DATE, 1)
                 }
                 CurrentUser.setSchedule(true)

@@ -37,7 +37,7 @@ abstract class MainDatabase : RoomDatabase() {
                     MainDatabase::class.java,
                     "diet_database"
                 )
-//                    .createFromAsset("asset.db")
+                    .createFromAsset("asset.db")
                     .fallbackToDestructiveMigration()
                     .build()
                 INSTANCE = instance

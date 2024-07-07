@@ -47,7 +47,7 @@ class SignInActivity : AppCompatActivity() {
                         if (loginDetailsList.isNotEmpty()) {
                             viewModel.getUserResultsById(loginDetailsList[0].id).observe(this) {
                                 if (it == null) {
-                                    var mifSanGeorFormula = 9.99*loginDetailsList[0].weight + 6.25*loginDetailsList[0].height + 4.92*loginDetailsList[0].age
+                                    var mifSanGeorFormula = 9.99*loginDetailsList[0].weight + 6.25*loginDetailsList[0].height - 4.92*loginDetailsList[0].age
                                     mifSanGeorFormula = if (loginDetailsList[0].gender == "male") {
                                         mifSanGeorFormula + 5
                                     } else {
@@ -67,8 +67,8 @@ class SignInActivity : AppCompatActivity() {
                                             userId = loginDetailsList[0].id,
                                             calories = mifSanGeorFormula.toFloat(),
                                             proteins = (mifSanGeorFormula*0.15/4).toFloat(),
-                                            lipids = (mifSanGeorFormula*0.2/9).toFloat(),
-                                            carbohydrates = (mifSanGeorFormula*0.65/4).toFloat()
+                                            lipids = (mifSanGeorFormula*0.3/9).toFloat(),
+                                            carbohydrates = (mifSanGeorFormula*0.55/4).toFloat()
                                         )
                                     )
                                 }

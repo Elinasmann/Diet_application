@@ -54,6 +54,9 @@ class HomeViewModel (application: Application) : AndroidViewModel(application) {
     fun getRecipeScheduleByUserId(id: Int, date: Date): LiveData<List<ScheduleOfRecipe>> {
         return repository.getRecipeScheduleByUserId(id, date)
     }
+    fun checkIsRecipeScheduleExist(id: Int, date: Date): ScheduleOfRecipe? = runBlocking {
+        repository.checkIsRecipeScheduleExist(id, date)
+    }
 
 
     fun getExerciseScheduleByUserId(id: Int, date: Date): LiveData<List<ScheduleOfExercise>> {

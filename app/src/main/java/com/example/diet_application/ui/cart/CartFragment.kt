@@ -11,8 +11,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.diet_application.CurrentUser
 import com.example.diet_application.db.ProductInCart
 import com.example.diet_application.databinding.FragmentCartBinding
+import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
+import java.util.Locale
 
 
 class CartFragment : Fragment(), CartInterface {
@@ -42,15 +44,20 @@ class CartFragment : Fragment(), CartInterface {
         cartItems.adapter = cartAdapter
 
 
-        val c = Calendar.getInstance()
-        val year = c.get(Calendar.YEAR)
-        val month = c.get(Calendar.MONTH)
-        val day = c.get(Calendar.DAY_OF_MONTH)
-        c.setTime(Date(year-1900, month, day))
+        val calendar: Calendar = Calendar.getInstance()
+        calendar.set(Calendar.HOUR_OF_DAY, 0)
+        calendar.set(Calendar.MINUTE, 0)
+        calendar.set(Calendar.SECOND, 0)
+        calendar.set(Calendar.MILLISECOND, 0)
+
+        if (viewModel.checkIsRecipeScheduleExist(CurrentUser.getId(), calendar.time) == null) {
+            calendar.add(Calendar.DATE, 1)
+        }
+
         val list = viewModel.getAllProductsInCartByUserIdCoroutine(CurrentUser.getId())
         if (list.isEmpty()) {
             repeat (4) {
-                viewModel.getRecipeScheduleByUserId(CurrentUser.getId(), c.time).observe(viewLifecycleOwner) {
+                viewModel.getRecipeScheduleByUserId(CurrentUser.getId(), calendar.time).observe(viewLifecycleOwner) {
                     for (item in it) {
                         val recipeId = item.recipeId
                         if (recipeId != null) {
@@ -65,7 +72,7 @@ class CartFragment : Fragment(), CartInterface {
                         }
                     }
                 }
-                c.add(Calendar.DATE, 1)
+                calendar.add(Calendar.DATE, 1)
             }
         } else {
             cartAdapter.updateList(list)

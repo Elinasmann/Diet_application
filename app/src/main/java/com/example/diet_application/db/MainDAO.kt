@@ -38,7 +38,7 @@ interface MainDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(item: User)
     @Query("SELECT * FROM users WHERE login LIKE :login")
-    fun checkLoginExists(login: String): LiveData<List<User>>
+    suspend fun checkLoginExists(login: String): User?
     @Query("SELECT * FROM users WHERE id LIKE :id")
     suspend fun getUserById(id: Int): User
     @Query("SELECT * FROM users WHERE login LIKE :login AND password LIKE :password")
@@ -77,6 +77,11 @@ interface MainDao {
     suspend fun insert(item: ScheduleOfRecipe)
     @Query("SELECT * FROM schedule_of_recipes WHERE user_id LIKE :id AND date LIKE :date ORDER BY id ASC")
     fun getRecipeScheduleByUserId(id: Int, date: Date): LiveData<List<ScheduleOfRecipe>>
+    @Query("SELECT * FROM schedule_of_recipes WHERE user_id LIKE :id AND date LIKE :date LIMIT 1")
+    suspend fun checkIsRecipeScheduleExist(id: Int, date: Date): ScheduleOfRecipe?
+    @Query("SELECT * FROM recipes WHERE calories < 500")
+    suspend fun getSmallCaloriesRecipes(): List<Recipe>
+
 
     @Query("SELECT * FROM schedule_of_exercises WHERE user_id LIKE :id AND date LIKE :date ORDER BY id ASC")
     fun getExerciseScheduleByUserId(id: Int, date: Date): LiveData<List<ScheduleOfExercise>>
@@ -104,7 +109,7 @@ interface MainDao {
     suspend fun insert(item: ProductInCart)
     @Update
     suspend fun update(item: ProductInCart)
-    @Query("DELETE FROM products_in_cart WHERE user_id LIKE :id")
+    @Query("DELETE FROM products_in_cart WHERE user_id LIKE :id AND check_buy = 1")
     suspend fun deleteCartByUserId(id: Int)
     @Query("SELECT * FROM products_in_cart WHERE product_id LIKE :productId AND user_id LIKE :userId")
     suspend fun checkIsProductInCart(productId: Int, userId: Int): List<ProductInCart>

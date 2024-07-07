@@ -33,8 +33,8 @@ class CartViewModel (application: Application) : AndroidViewModel(application) {
     fun getProductTitleById(id: Int): String = runBlocking {
         repository.getProductTitleById(id)
     }
-    fun getAllProductsInCartByUserId(id: Int): LiveData<List<ProductInCart>> {
-        return repository.getAllProductsInCartByUserId(id)
+    fun checkIsRecipeScheduleExist(id: Int, date: Date): ScheduleOfRecipe? = runBlocking {
+        repository.checkIsRecipeScheduleExist(id, date)
     }
     fun getAllProductsInCartByUserIdCoroutine(id: Int): List<ProductInCart> = runBlocking {
         repository.getAllProductsInCartByUserIdCoroutine(id)

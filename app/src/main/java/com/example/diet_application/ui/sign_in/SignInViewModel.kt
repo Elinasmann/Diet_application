@@ -31,8 +31,8 @@ class SignInViewModel (application: Application) : AndroidViewModel(application)
     fun checkIfUserIsRegistered(login: String, password: String): LiveData<List<User>> {
         return repository.checkIfUserIsRegistered(login, password)
     }
-    fun checkLoginExists(login: String): LiveData<List<User>> {
-        return repository.checkLoginExists(login)
+    fun checkLoginExists(login: String): User? = runBlocking {
+        repository.checkLoginExists(login)
     }
     fun getUserResultsById(id: Int): LiveData<UserResults> {
         return repository.getUserResultsById(id)
