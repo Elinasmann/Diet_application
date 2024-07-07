@@ -1,2 +1,2 @@
-1. Download .apk file by fath: app\build\outputs\apk\debug\app-debug.apk
+1. Download app.apk file
 2. Install it
